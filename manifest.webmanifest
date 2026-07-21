@@ -1,11 +1,11 @@
 {
-  "name": "FUJI ROCK 2026 SAT Timetable",
-  "short_name": "FUJI ROCK",
-  "start_url": "./index.html",
+  "name": "Fuji Rock Companion 2026",
+  "short_name": "FR Companion",
+  "start_url": "./index.html?v=3",
   "display": "standalone",
   "background_color": "#f4f4f1",
   "theme_color": "#111111",
-  "description": "FUJI ROCK FESTIVAL 2026 土曜日・自由選択式タイムテーブル",
+  "description": "行き・フェス・帰りを一つにまとめたFUJI ROCK 2026専用PWA",
   "icons": [
     {
       "src": "./icon-192.png",

@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="FUJI ROCK">
-<title>FUJI ROCK 2026｜7/25 SAT・自由選択版 スマホ版</title>
+<title>Fuji Rock Companion 2026</title>
 <style>
 :root{--bg:#f4f4f1;--ink:#111;--muted:#676767;--card:#fff;--line:#d8d8d2}
 *{box-sizing:border-box}
@@ -167,10 +167,96 @@ footer{font-size:11px;color:#777;padding:18px 3px;text-align:center}
   font-weight:700;
 }
 
+
+/* Companion v3 */
+body{padding-bottom:82px}
+.global-head{position:sticky;top:0;z-index:60;background:rgba(17,17,17,.97);color:#fff;padding:calc(11px + env(safe-area-inset-top)) 14px 9px;backdrop-filter:blur(12px)}
+.global-head h1{margin:0;font-size:19px}.global-head .sub{margin-top:3px}
+.page{display:none}.page.active{display:block}
+.bottom-nav{position:fixed;left:0;right:0;bottom:0;z-index:80;display:grid;grid-template-columns:repeat(3,1fr);gap:7px;padding:8px 10px calc(8px + env(safe-area-inset-bottom));background:rgba(17,17,17,.96);backdrop-filter:blur(12px)}
+.bottom-nav button{border:1px solid #555;border-radius:12px;background:#252525;color:#ddd;padding:9px 4px;font-size:12px;font-weight:800}
+.bottom-nav button.active{background:#fff;color:#111;border-color:#fff}
+.festival-head{position:sticky;top:64px;z-index:20;background:rgba(17,17,17,.96);color:#fff;padding:10px 14px}
+.festival-head h1{font-size:17px}
+.page-inner{max-width:760px;margin:auto;padding:12px 12px 30px}
+.hero-card,.info-card{background:#fff;border:1px solid #ddd;border-radius:16px;padding:14px;margin-bottom:11px;box-shadow:0 1px 0 rgba(0,0,0,.05)}
+.hero-card h2,.info-card h2{font-size:17px;margin:0 0 7px}.info-card h3{font-size:15px;margin:0 0 6px}
+.kicker{font-size:11px;font-weight:900;color:#666;letter-spacing:.08em}
+.route-line{display:grid;grid-template-columns:32px 1fr;gap:9px;align-items:start;margin:9px 0}
+.route-no{width:29px;height:29px;border-radius:50%;display:grid;place-items:center;background:#111;color:#fff;font-weight:900;font-size:12px}
+.route-line strong{display:block;font-size:14px}.route-line small{color:#666}
+.action-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.action{display:block;text-align:center;text-decoration:none;border-radius:12px;padding:11px 8px;background:#111;color:#fff;font-weight:800;font-size:13px}
+.action.light{background:#eef2f7;color:#111;border:1px solid #ccd3dc}.action.full{grid-column:1/-1}
+.warning{background:#fff4d6;border:1px solid #ead08a;border-radius:12px;padding:10px;font-size:12px;line-height:1.5}
+.good{background:#eaf7ef;border:1px solid #a9d8b8;border-radius:12px;padding:10px;font-size:12px;line-height:1.5}
+.checklist label{display:flex;gap:9px;align-items:center;padding:10px 2px;border-bottom:1px solid #eee;font-size:14px}
+.checklist input{width:19px;height:19px}.mini{font-size:11px;color:#666;line-height:1.5}
+.next-card{margin:8px 12px 4px;background:#111;color:#fff;border-radius:15px;padding:13px}
+.next-card .timeleft{font-size:12px;color:#bbb}.next-card strong{display:block;font-size:20px;margin:3px 0}
+.grid-selected{background:#eaf3ff!important;outline:2px solid #3178c6}.grid-fixed{background:#fff2a8!important;outline:2px solid #111}
+@media(min-width:700px){.festival-head{top:0}.bottom-nav{max-width:760px;left:50%;transform:translateX(-50%);border-radius:16px 16px 0 0}.global-head{position:relative}}
+
 </style>
 </head>
 <body>
-<header>
+<header class="global-head">
+  <h1>FUJI ROCK COMPANION 2026</h1>
+  <div class="sub">市川 → 中野坂上 → 神立 → 苗場 → 温泉 → 帰宅</div>
+</header>
+
+<section class="page active" id="page-go">
+  <div class="page-inner">
+    <div class="hero-card">
+      <div class="kicker">7月25日（土）｜行き</div>
+      <h2>🚗 市川を5:30出発</h2>
+      <div class="good">中野坂上で合流後、練馬ICから関越道へ。神立駐車場から会場までは公式シャトルで約30分です。</div>
+      <div class="action-grid">
+        <a class="action full" href="https://www.google.com/maps/dir/?api=1&origin=JR%E5%B8%82%E5%B7%9D%E9%A7%85&destination=%E7%A5%9E%E7%AB%8B%E9%AB%98%E5%8E%9F%E9%A7%90%E8%BB%8A%E5%A0%B4&travelmode=driving&waypoints=%E4%B8%AD%E9%87%8E%E5%9D%82%E4%B8%8A%E9%A7%85" target="_blank" rel="noopener">Googleマップでライブ所要時間</a>
+        <a class="action light" href="https://www.drivetraffic.jp/map.html?area=03&lv=6&t=r" target="_blank" rel="noopener">関越道・外環</a>
+        <a class="action light" href="https://www.jartic.or.jp/map/" target="_blank" rel="noopener">JARTIC全道路</a>
+      </div>
+      <p class="mini">このアプリ自体は道路情報を自動取得せず、公式のリアルタイム画面とGoogleマップをワンタップで開きます。出発直前と中野坂上出発時に再確認するのが確実です。</p>
+    </div>
+
+    <div class="info-card">
+      <h2>推奨ルート</h2>
+      <div class="route-line"><div class="route-no">1</div><div><strong>JR市川駅周辺</strong><small>5:30出発目安</small></div></div>
+      <div class="route-line"><div class="route-no">2</div><div><strong>中野坂上</strong><small>首都高中央環状線・練馬方面の状況を再確認</small></div></div>
+      <div class="route-line"><div class="route-no">3</div><div><strong>練馬IC → 関越道</strong><small>大泉JCT、所沢、東松山、渋川伊香保付近を重点確認</small></div></div>
+      <div class="route-line"><div class="route-no">4</div><div><strong>湯沢IC → 神立駐車場</strong><small>目標到着10:00前後</small></div></div>
+      <div class="route-line"><div class="route-no">5</div><div><strong>神立 → 苗場</strong><small>シャトル約30分。混雑待ち時間は別途見込む</small></div></div>
+    </div>
+
+    <div class="info-card">
+      <h2>出発チェック</h2>
+      <div class="checklist" data-list="go">
+        <label><input type="checkbox">入場チケット・駐車券</label>
+        <label><input type="checkbox">財布・免許証・ETCカード</label>
+        <label><input type="checkbox">スマホ・モバイルバッテリー</label>
+        <label><input type="checkbox">雨具・防寒着・帽子</label>
+        <label><input type="checkbox">飲み物（缶は会場持込不可）</label>
+        <label><input type="checkbox">折りたたみ椅子・敷物</label>
+        <label><input type="checkbox">着替え・タオル・温泉セット</label>
+        <label><input type="checkbox">仮眠用アイマスク・耳栓</label>
+      </div>
+    </div>
+
+    <div class="info-card">
+      <h2>休憩候補</h2>
+      <p><strong>高坂SA</strong><br><span class="mini">中野坂上から最初の本格休憩。混雑時は手前の三芳PAも候補。</span></p>
+      <p><strong>赤城高原SA</strong><br><span class="mini">湯沢手前の休憩・給油候補。ドライバー交代にも向く。</span></p>
+      <div class="action-grid">
+        <a class="action light" href="https://www.driveplaza.com/sapa/1800/1800041/1/" target="_blank" rel="noopener">高坂SA</a>
+        <a class="action light" href="https://www.driveplaza.com/sapa/1800/1800101/1/" target="_blank" rel="noopener">赤城高原SA</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="page" id="page-fes">
+  <div class="next-card" id="nextShow"><div class="timeleft">選択したライブから自動表示</div><strong>次に観るライブ</strong><span>「今日見る」を追加してください</span></div>
+  <div class="festival-head">
   <h1>FUJI ROCK 2026｜7/25 SAT・自由選択版</h1>
   <div class="sub">GREEN → ORANGE ECHO｜アーティスト名タップで公式紹介ページ</div>
   <input class="view-radio" type="radio" name="view" id="view-list" checked>
@@ -179,7 +265,7 @@ footer{font-size:11px;color:#777;padding:18px 3px;text-align:center}
     <label for="view-list">📱 時間順</label>
     <label for="view-grid">↔ 5ステージ表</label>
   </div>
-</header>
+</div>
 
 <div class="app-shell">
 <section id="listView">
@@ -487,46 +573,110 @@ footer{font-size:11px;color:#777;padding:18px 3px;text-align:center}
 </section>
 
 <section id="gridView">
-  <div class="legend">上段のステージ名と左端の時間は固定です。横スクロールできます。 <span class="dot" style="background:#fff2a8;border:1px solid #111"></span>マスト　<span class="dot" style="background:#f3edcc"></span>候補</div>
+  <div class="legend">上段のステージ名と左端の時間は固定です。横スクロールできます。黄色＝固定、青＝「今日見る」。</div>
   <div class="table-wrap">
   <table>
     <thead><tr><th>開始</th><th>GREEN</th><th>WHITE</th><th>RED</th><th>FIELD</th><th>ORANGE</th></tr></thead>
-    <tbody><tr><th>10:20</th><td></td><td></td><td><a class="" href="https://fujirockfestival.com/artist/detail/6858" target="_blank" rel="noopener">ブランデー戦記<small>〜11:00</small></a></td><td></td><td></td></tr>
-<tr><th>10:50</th><td></td><td></td><td></td><td></td><td><a class="" href="https://fujirockfestival.com/artist/detail/6914" target="_blank" rel="noopener">来島エル<small>〜11:30</small></a></td></tr>
-<tr><th>11:00</th><td><a class="" href="https://fujirockfestival.com/artist/detail/6856" target="_blank" rel="noopener">Bialystocks<small>〜12:00</small></a></td><td></td><td></td><td></td><td></td></tr>
-<tr><th>11:10</th><td></td><td></td><td></td><td><a class="pick-must" href="https://fujirockfestival.com/artist/detail/6557" target="_blank" rel="noopener">柴田聡子 (BAND SET)<small>〜12:00</small></a></td><td></td></tr>
-<tr><th>11:30</th><td></td><td></td><td><a class="" href="https://fujirockfestival.com/artist/detail/4586" target="_blank" rel="noopener">SIX LOUNGE<small>〜12:10</small></a></td><td></td><td></td></tr>
-<tr><th>12:10</th><td></td><td><a class="" href="https://fujirockfestival.com/artist/detail/1437" target="_blank" rel="noopener">Riddim Saunter<small>〜13:00</small></a></td><td></td><td></td><td></td></tr>
-<tr><th>12:15</th><td></td><td></td><td></td><td></td><td><a class="" href="https://fujirockfestival.com/artist/detail/6913" target="_blank" rel="noopener">タデクイ<small>〜12:55</small></a></td></tr>
-<tr><th>12:40</th><td></td><td></td><td><a class="pick-must" href="https://fujirockfestival.com/artist/detail/6862" target="_blank" rel="noopener">QUADECA<small>〜13:30</small></a></td><td></td><td></td></tr>
-<tr><th>12:50</th><td></td><td></td><td></td><td><a class="" href="https://fujirockfestival.com/artist/detail/6864" target="_blank" rel="noopener">YUUF<small>〜13:50</small></a></td><td></td></tr>
-<tr><th>13:00</th><td><a class="" href="https://fujirockfestival.com/artist/detail/6863" target="_blank" rel="noopener">Trueno<small>〜14:00</small></a></td><td></td><td></td><td></td><td></td></tr>
-<tr><th>13:50</th><td></td><td><a class="pick-maybe" href="https://fujirockfestival.com/artist/detail/6857" target="_blank" rel="noopener">BOHEMIAN BETYARS<small>〜14:40</small></a></td><td></td><td></td><td><a class="pick-maybe" href="https://fujirockfestival.com/artist/detail/2926" target="_blank" rel="noopener">neco眠る<small>〜14:30</small></a></td></tr>
-<tr><th>14:00</th><td></td><td></td><td><a class="pick-maybe" href="https://fujirockfestival.com/artist/detail/6822" target="_blank" rel="noopener">THE BETHS<small>〜15:00</small></a></td><td></td><td></td></tr>
-<tr><th>14:40</th><td></td><td></td><td></td><td><a class="" href="https://fujirockfestival.com/artist/detail/6861" target="_blank" rel="noopener">LA LOM<small>〜15:40</small></a></td><td></td></tr>
-<tr><th>15:00</th><td><a class="" href="https://fujirockfestival.com/artist/detail/6859" target="_blank" rel="noopener">IO<small>〜16:00</small></a></td><td></td><td></td><td></td><td></td></tr>
-<tr><th>15:30</th><td></td><td><a class="" href="https://fujirockfestival.com/artist/detail/5799" target="_blank" rel="noopener">Kroi<small>〜16:30</small></a></td><td></td><td></td><td></td></tr>
-<tr><th>15:40</th><td></td><td></td><td></td><td></td><td><a class="pick-maybe" href="https://fujirockfestival.com/artist/detail/6830" target="_blank" rel="noopener">CADEJO<small>〜16:20</small></a></td></tr>
-<tr><th>16:00</th><td></td><td></td><td><a class="pick-must" href="https://fujirockfestival.com/artist/detail/3187" target="_blank" rel="noopener">cero<small>〜17:00</small></a></td><td></td><td></td></tr>
-<tr><th>16:40</th><td></td><td></td><td></td><td><a class="" href="https://fujirockfestival.com/artist/detail/969" target="_blank" rel="noopener">OAU<small>〜17:40</small></a></td><td></td></tr>
-<tr><th>17:00</th><td><a class="pick-must" href="https://fujirockfestival.com/artist/detail/158" target="_blank" rel="noopener">BASEMENT JAXX<small>〜18:00</small></a></td><td></td><td></td><td></td><td></td></tr>
-<tr><th>17:50</th><td></td><td><a class="" href="https://fujirockfestival.com/artist/detail/6887" target="_blank" rel="noopener">JOEY VALENCE &amp; BRAE<small>〜18:50</small></a></td><td></td><td></td><td><a class="" href="https://fujirockfestival.com/artist/detail/70" target="_blank" rel="noopener">DMBQ<small>〜18:30</small></a></td></tr>
-<tr><th>18:00</th><td></td><td></td><td><a class="" href="https://fujirockfestival.com/artist/detail/3961" target="_blank" rel="noopener">THURSTON MOORE GROUP<small>〜19:00</small></a></td><td></td><td></td></tr>
-<tr><th>18:30</th><td></td><td></td><td></td><td><a class="pick-maybe" href="https://fujirockfestival.com/artist/detail/6860" target="_blank" rel="noopener">KOKOROKO<small>〜19:40</small></a></td><td></td></tr>
-<tr><th>19:00</th><td><a class="pick-must" href="https://fujirockfestival.com/artist/detail/6853" target="_blank" rel="noopener">Fujii Kaze<small>〜20:10</small></a></td><td></td><td></td><td></td><td></td></tr>
-<tr><th>19:50</th><td></td><td><a class="pick-maybe" href="https://fujirockfestival.com/artist/detail/6855" target="_blank" rel="noopener">XG<small>〜20:50</small></a></td><td></td><td></td><td><a class="" href="https://fujirockfestival.com/artist/detail/6452" target="_blank" rel="noopener">Bongjeingan<small>〜20:30</small></a></td></tr>
-<tr><th>20:10</th><td></td><td></td><td><a class="" href="https://fujirockfestival.com/artist/detail/2431" target="_blank" rel="noopener">サニーデイ・サービス<small>〜21:10</small></a></td><td></td><td></td></tr>
-<tr><th>20:30</th><td></td><td></td><td></td><td><a class="" href="https://fujirockfestival.com/artist/detail/6166" target="_blank" rel="noopener">BADBADNOTGOOD<small>〜22:00</small></a></td><td></td></tr>
-<tr><th>21:10</th><td><a class="pick-must" href="https://fujirockfestival.com/artist/detail/5212" target="_blank" rel="noopener">KHRUANGBIN<small>〜22:40</small></a></td><td></td><td></td><td></td><td></td></tr>
-<tr><th>22:00</th><td></td><td><a class="" href="https://fujirockfestival.com/artist/detail/6854" target="_blank" rel="noopener">TOMORA<small>〜23:15</small></a></td><td></td><td></td><td></td></tr>
-<tr><th>23:30</th><td></td><td></td><td><a class="" href="https://fujirockfestival.com/artist/detail/6889" target="_blank" rel="noopener">唾奇<small>〜24:20</small></a></td><td></td><td></td></tr>
-<tr><th>24:30</th><td></td><td></td><td><a class="" href="https://fujirockfestival.com/artist/detail/6888" target="_blank" rel="noopener">KELLY LEE OWENS (DJ)<small>〜26:00</small></a></td><td></td><td></td></tr>
-<tr><th>26:00</th><td></td><td></td><td><a class="" href="https://fujirockfestival.com/artist/detail/6909" target="_blank" rel="noopener">Weval DJ Set<small>〜27:30</small></a></td><td></td><td></td></tr>
-<tr><th>27:30</th><td></td><td></td><td><a class="" href="https://fujirockfestival.com/artist/detail/4434" target="_blank" rel="noopener">Soichi Terada<small>〜29:00</small></a></td><td></td><td></td></tr></tbody>
+    <tbody><tr><th>10:20</th><td></td><td></td><td><a data-grid-name="ブランデー戦記" class="" href="https://fujirockfestival.com/artist/detail/6858" target="_blank" rel="noopener">ブランデー戦記<small>〜11:00</small></a></td><td></td><td></td></tr>
+<tr><th>10:50</th><td></td><td></td><td></td><td></td><td><a data-grid-name="来島エル" class="" href="https://fujirockfestival.com/artist/detail/6914" target="_blank" rel="noopener">来島エル<small>〜11:30</small></a></td></tr>
+<tr><th>11:00</th><td><a data-grid-name="Bialystocks" class="" href="https://fujirockfestival.com/artist/detail/6856" target="_blank" rel="noopener">Bialystocks<small>〜12:00</small></a></td><td></td><td></td><td></td><td></td></tr>
+<tr><th>11:10</th><td></td><td></td><td></td><td><a data-grid-name="柴田聡子 (BAND SET)" class="" href="https://fujirockfestival.com/artist/detail/6557" target="_blank" rel="noopener">柴田聡子 (BAND SET)<small>〜12:00</small></a></td><td></td></tr>
+<tr><th>11:30</th><td></td><td></td><td><a data-grid-name="SIX LOUNGE" class="" href="https://fujirockfestival.com/artist/detail/4586" target="_blank" rel="noopener">SIX LOUNGE<small>〜12:10</small></a></td><td></td><td></td></tr>
+<tr><th>12:10</th><td></td><td><a data-grid-name="Riddim Saunter" class="" href="https://fujirockfestival.com/artist/detail/1437" target="_blank" rel="noopener">Riddim Saunter<small>〜13:00</small></a></td><td></td><td></td><td></td></tr>
+<tr><th>12:15</th><td></td><td></td><td></td><td></td><td><a data-grid-name="タデクイ" class="" href="https://fujirockfestival.com/artist/detail/6913" target="_blank" rel="noopener">タデクイ<small>〜12:55</small></a></td></tr>
+<tr><th>12:40</th><td></td><td></td><td><a data-grid-name="QUADECA" class="" href="https://fujirockfestival.com/artist/detail/6862" target="_blank" rel="noopener">QUADECA<small>〜13:30</small></a></td><td></td><td></td></tr>
+<tr><th>12:50</th><td></td><td></td><td></td><td><a data-grid-name="YUUF" class="" href="https://fujirockfestival.com/artist/detail/6864" target="_blank" rel="noopener">YUUF<small>〜13:50</small></a></td><td></td></tr>
+<tr><th>13:00</th><td><a data-grid-name="Trueno" class="" href="https://fujirockfestival.com/artist/detail/6863" target="_blank" rel="noopener">Trueno<small>〜14:00</small></a></td><td></td><td></td><td></td><td></td></tr>
+<tr><th>13:50</th><td></td><td><a data-grid-name="BOHEMIAN BETYARS" class="" href="https://fujirockfestival.com/artist/detail/6857" target="_blank" rel="noopener">BOHEMIAN BETYARS<small>〜14:40</small></a></td><td></td><td></td><td><a data-grid-name="neco眠る" class="" href="https://fujirockfestival.com/artist/detail/2926" target="_blank" rel="noopener">neco眠る<small>〜14:30</small></a></td></tr>
+<tr><th>14:00</th><td></td><td></td><td><a data-grid-name="THE BETHS" class="" href="https://fujirockfestival.com/artist/detail/6822" target="_blank" rel="noopener">THE BETHS<small>〜15:00</small></a></td><td></td><td></td></tr>
+<tr><th>14:40</th><td></td><td></td><td></td><td><a data-grid-name="LA LOM" class="" href="https://fujirockfestival.com/artist/detail/6861" target="_blank" rel="noopener">LA LOM<small>〜15:40</small></a></td><td></td></tr>
+<tr><th>15:00</th><td><a data-grid-name="IO" class="" href="https://fujirockfestival.com/artist/detail/6859" target="_blank" rel="noopener">IO<small>〜16:00</small></a></td><td></td><td></td><td></td><td></td></tr>
+<tr><th>15:30</th><td></td><td><a data-grid-name="Kroi" class="" href="https://fujirockfestival.com/artist/detail/5799" target="_blank" rel="noopener">Kroi<small>〜16:30</small></a></td><td></td><td></td><td></td></tr>
+<tr><th>15:40</th><td></td><td></td><td></td><td></td><td><a data-grid-name="CADEJO" class="" href="https://fujirockfestival.com/artist/detail/6830" target="_blank" rel="noopener">CADEJO<small>〜16:20</small></a></td></tr>
+<tr><th>16:00</th><td></td><td></td><td><a data-grid-name="cero" class="" href="https://fujirockfestival.com/artist/detail/3187" target="_blank" rel="noopener">cero<small>〜17:00</small></a></td><td></td><td></td></tr>
+<tr><th>16:40</th><td></td><td></td><td></td><td><a data-grid-name="OAU" class="" href="https://fujirockfestival.com/artist/detail/969" target="_blank" rel="noopener">OAU<small>〜17:40</small></a></td><td></td></tr>
+<tr><th>17:00</th><td><a data-grid-name="BASEMENT JAXX" class="" href="https://fujirockfestival.com/artist/detail/158" target="_blank" rel="noopener">BASEMENT JAXX<small>〜18:00</small></a></td><td></td><td></td><td></td><td></td></tr>
+<tr><th>17:50</th><td></td><td><a data-grid-name="JOEY VALENCE &amp; BRAE" class="" href="https://fujirockfestival.com/artist/detail/6887" target="_blank" rel="noopener">JOEY VALENCE &amp; BRAE<small>〜18:50</small></a></td><td></td><td></td><td><a data-grid-name="DMBQ" class="" href="https://fujirockfestival.com/artist/detail/70" target="_blank" rel="noopener">DMBQ<small>〜18:30</small></a></td></tr>
+<tr><th>18:00</th><td></td><td></td><td><a data-grid-name="THURSTON MOORE GROUP" class="" href="https://fujirockfestival.com/artist/detail/3961" target="_blank" rel="noopener">THURSTON MOORE GROUP<small>〜19:00</small></a></td><td></td><td></td></tr>
+<tr><th>18:30</th><td></td><td></td><td></td><td><a data-grid-name="KOKOROKO" class="" href="https://fujirockfestival.com/artist/detail/6860" target="_blank" rel="noopener">KOKOROKO<small>〜19:40</small></a></td><td></td></tr>
+<tr><th>19:00</th><td><a data-grid-name="Fujii Kaze" class="" href="https://fujirockfestival.com/artist/detail/6853" target="_blank" rel="noopener">Fujii Kaze<small>〜20:10</small></a></td><td></td><td></td><td></td><td></td></tr>
+<tr><th>19:50</th><td></td><td><a data-grid-name="XG" class="" href="https://fujirockfestival.com/artist/detail/6855" target="_blank" rel="noopener">XG<small>〜20:50</small></a></td><td></td><td></td><td><a data-grid-name="Bongjeingan" class="" href="https://fujirockfestival.com/artist/detail/6452" target="_blank" rel="noopener">Bongjeingan<small>〜20:30</small></a></td></tr>
+<tr><th>20:10</th><td></td><td></td><td><a data-grid-name="サニーデイ・サービス" class="" href="https://fujirockfestival.com/artist/detail/2431" target="_blank" rel="noopener">サニーデイ・サービス<small>〜21:10</small></a></td><td></td><td></td></tr>
+<tr><th>20:30</th><td></td><td></td><td></td><td><a data-grid-name="BADBADNOTGOOD" class="" href="https://fujirockfestival.com/artist/detail/6166" target="_blank" rel="noopener">BADBADNOTGOOD<small>〜22:00</small></a></td><td></td></tr>
+<tr><th>21:10</th><td><a data-grid-name="KHRUANGBIN" class="" href="https://fujirockfestival.com/artist/detail/5212" target="_blank" rel="noopener">KHRUANGBIN<small>〜22:40</small></a></td><td></td><td></td><td></td><td></td></tr>
+<tr><th>22:00</th><td></td><td><a data-grid-name="TOMORA" class="" href="https://fujirockfestival.com/artist/detail/6854" target="_blank" rel="noopener">TOMORA<small>〜23:15</small></a></td><td></td><td></td><td></td></tr>
+<tr><th>23:30</th><td></td><td></td><td><a data-grid-name="唾奇" class="" href="https://fujirockfestival.com/artist/detail/6889" target="_blank" rel="noopener">唾奇<small>〜24:20</small></a></td><td></td><td></td></tr>
+<tr><th>24:30</th><td></td><td></td><td><a data-grid-name="KELLY LEE OWENS (DJ)" class="" href="https://fujirockfestival.com/artist/detail/6888" target="_blank" rel="noopener">KELLY LEE OWENS (DJ)<small>〜26:00</small></a></td><td></td><td></td></tr>
+<tr><th>26:00</th><td></td><td></td><td><a data-grid-name="Weval DJ Set" class="" href="https://fujirockfestival.com/artist/detail/6909" target="_blank" rel="noopener">Weval DJ Set<small>〜27:30</small></a></td><td></td><td></td></tr>
+<tr><th>27:30</th><td></td><td></td><td><a data-grid-name="Soichi Terada" class="" href="https://fujirockfestival.com/artist/detail/4434" target="_blank" rel="noopener">Soichi Terada<small>〜29:00</small></a></td><td></td><td></td></tr></tbody>
   </table>
   </div>
 </section>
 </div>
+</section>
+
+<section class="page" id="page-back">
+  <div class="page-inner">
+    <div class="hero-card">
+      <div class="kicker">終演後｜帰り</div>
+      <h2>🚌 神立へ戻る → 仮眠 → 朝風呂</h2>
+      <div class="warning">KHRUANGBINは22:40終了予定。土曜の会場発→神立のシャトル最終は25:00。乗車待ちと約30分の乗車時間を見込み、終演後は早めにバス列へ。</div>
+      <div class="action-grid">
+        <a class="action light" href="https://www.fujirockfestival.com/access/index" target="_blank" rel="noopener">公式シャトル情報</a>
+        <a class="action light" href="https://www.google.com/maps/search/?api=1&query=%E7%A5%9E%E7%AB%8B%E9%AB%98%E5%8E%9F%E9%A7%90%E8%BB%8A%E5%A0%B4" target="_blank" rel="noopener">神立駐車場</a>
+      </div>
+    </div>
+
+    <div class="info-card">
+      <h2>おすすめ行程</h2>
+      <div class="route-line"><div class="route-no">1</div><div><strong>22:40 KHRUANGBIN終了</strong><small>会場発シャトル乗り場へ</small></div></div>
+      <div class="route-line"><div class="route-no">2</div><div><strong>神立駐車場へ戻る</strong><small>乗車約30分＋待ち時間</small></div></div>
+      <div class="route-line"><div class="route-no">3</div><div><strong>車で3〜4時間仮眠</strong><small>飲酒している場合は、時間だけでなく完全に酒気が抜けたことを優先</small></div></div>
+      <div class="route-line"><div class="route-no">4</div><div><strong>5:30以降 石打ユングパルナス</strong><small>神立から車でおおむね10〜15分圏。8:00〜10:00は清掃で入浴不可</small></div></div>
+      <div class="route-line"><div class="route-no">5</div><div><strong>朝食・交通確認後に市川へ</strong><small>関越道・首都高の最新状況を確認</small></div></div>
+    </div>
+
+    <div class="info-card">
+      <h2>♨️ 第一候補：石打ユングパルナス</h2>
+      <div class="good">通常の夏期営業は5:30〜23:00。早朝に入れて、露天風呂・サウナ・無料駐車場があり、今回の行程に最も合わせやすい候補です。</div>
+      <p class="mini">8:00〜10:00は清掃時間。フジロック期間の特別営業が告知される場合があるため、当日公式サイトで最終確認してください。</p>
+      <div class="action-grid">
+        <a class="action" href="https://www.google.com/maps/dir/?api=1&origin=%E7%A5%9E%E7%AB%8B%E9%AB%98%E5%8E%9F%E9%A7%90%E8%BB%8A%E5%A0%B4&destination=%E7%9F%B3%E6%89%93%E3%83%A6%E3%83%B3%E3%82%B0%E3%83%91%E3%83%AB%E3%83%8A%E3%82%B9&travelmode=driving" target="_blank" rel="noopener">温泉へナビ</a>
+        <a class="action light" href="https://www.yungparunas.com/" target="_blank" rel="noopener">営業時間確認</a>
+      </div>
+    </div>
+
+    <div class="info-card">
+      <h2>予備候補：越後湯沢の外湯</h2>
+      <p><strong>宿場の湯</strong><br><span class="mini">フジロック期間は早朝6:00からの特別営業案内あり。公式外湯サイトで当日の営業状況を確認。</span></p>
+      <p><strong>山の湯</strong><br><span class="mini">昔ながらの共同浴場。営業時間は日程で変わるため公式確認が必要。</span></p>
+      <div class="action-grid"><a class="action light full" href="https://yuzawaonsen.com/" target="_blank" rel="noopener">越後湯沢・外湯公式</a></div>
+      <div class="warning">神立スノーリゾートの「神の湯」は冬季施設で、2025–26シーズンは営業終了済みです。7月の候補にはしません。</div>
+    </div>
+
+    <div class="info-card">
+      <h2>帰宅前チェック</h2>
+      <div class="checklist" data-list="back">
+        <label><input type="checkbox">十分に睡眠を取った</label>
+        <label><input type="checkbox">酒気が完全に抜けている</label>
+        <label><input type="checkbox">水分・朝食を取った</label>
+        <label><input type="checkbox">関越道・首都高の渋滞を確認</label>
+        <label><input type="checkbox">眠気があれば無理せず追加休憩</label>
+      </div>
+      <div class="action-grid">
+        <a class="action" href="https://www.google.com/maps/dir/?api=1&origin=%E7%9F%B3%E6%89%93%E3%83%A6%E3%83%B3%E3%82%B0%E3%83%91%E3%83%AB%E3%83%8A%E3%82%B9&destination=JR%E5%B8%82%E5%B7%9D%E9%A7%85&travelmode=driving&waypoints=%E4%B8%AD%E9%87%8E%E5%9D%82%E4%B8%8A%E9%A7%85" target="_blank" rel="noopener">市川へナビ</a>
+        <a class="action light" href="https://www.drivetraffic.jp/map.html?area=03&lv=6&t=r" target="_blank" rel="noopener">渋滞確認</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<nav class="bottom-nav" aria-label="メインメニュー">
+  <button class="active" data-page="go">🚗<br>行き</button>
+  <button data-page="fes">🎵<br>フェス</button>
+  <button data-page="back">♨️<br>帰り</button>
+</nav>
+
 <script>
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
@@ -534,7 +684,6 @@ if ('serviceWorker' in navigator) {
   });
 }
 </script>
-
 <script>
 (function(){
   const KEY='fujirock2026-selected-artists-v2';
@@ -577,6 +726,75 @@ if ('serviceWorker' in navigator) {
   render();
 })();
 </script>
+<script>
+(function(){
+  const pages={go:document.getElementById('page-go'),fes:document.getElementById('page-fes'),back:document.getElementById('page-back')};
+  const nav=[...document.querySelectorAll('.bottom-nav button')];
+  function openPage(name){
+    Object.entries(pages).forEach(([k,v])=>v.classList.toggle('active',k===name));
+    nav.forEach(b=>b.classList.toggle('active',b.dataset.page===name));
+    localStorage.setItem('frc-page',name);
+    window.scrollTo(0,0);
+  }
+  nav.forEach(b=>b.addEventListener('click',()=>openPage(b.dataset.page)));
+  openPage(localStorage.getItem('frc-page')||'go');
 
+  document.querySelectorAll('.checklist').forEach(list=>{
+    const key='frc-check-'+list.dataset.list;
+    const boxes=[...list.querySelectorAll('input')];
+    let state=[];
+    try{state=JSON.parse(localStorage.getItem(key)||'[]')}catch(e){}
+    boxes.forEach((b,i)=>{
+      b.checked=!!state[i];
+      b.addEventListener('change',()=>localStorage.setItem(key,JSON.stringify(boxes.map(x=>x.checked))));
+    });
+  });
+
+  function mins(s){
+    const parts=s.split(':').map(Number),h=parts[0],m=parts[1];
+    return (h>=24?h-24:h)*60+m+(h>=24?1440:0);
+  }
+  function updateNext(){
+    const fixed=['Fujii Kaze','KHRUANGBIN'];
+    let selected=[];
+    try{selected=JSON.parse(localStorage.getItem('fujirock2026-selected-artists-v2')||'[]')}catch(e){}
+    const targets=new Set(fixed.concat(selected));
+    const cards=[...document.querySelectorAll('.event[data-name]')].filter(c=>targets.has(c.dataset.name));
+    const now=new Date();
+    let nowM=now.getHours()*60+now.getMinutes();
+    const festivalDate=now.getFullYear()===2026&&now.getMonth()===6&&(now.getDate()===25||now.getDate()===26);
+    if(now.getDate()===26&&now.getHours()<6) nowM+=1440;
+    const upcoming=cards.map(c=>({
+      card:c,name:c.dataset.name,start:mins(c.querySelector('.time').childNodes[0].textContent.trim()),
+      stage:c.querySelector('.stage').textContent
+    })).filter(x=>!festivalDate||x.start>=nowM).sort((a,b)=>a.start-b.start)[0];
+    const box=document.getElementById('nextShow');
+    if(!upcoming){
+      box.innerHTML='<div class="timeleft">選択した予定</div><strong>本日の予定は終了</strong><span>帰りタブでシャトル・温泉を確認</span>';
+      return;
+    }
+    let label='予定';
+    if(festivalDate){
+      const d=upcoming.start-nowM;
+      const hrs=Math.floor(d/60);
+      label=d===0?'開演時刻':'あと'+(hrs?hrs+'時間':'')+(d%60)+'分';
+    }
+    box.innerHTML='<div class="timeleft">'+label+'</div><strong>'+upcoming.name+'</strong><span>'+upcoming.card.querySelector('.time').childNodes[0].textContent.trim()+'｜'+upcoming.stage+'</span>';
+  }
+
+  function syncGrid(){
+    let selected=[];
+    try{selected=JSON.parse(localStorage.getItem('fujirock2026-selected-artists-v2')||'[]')}catch(e){}
+    document.querySelectorAll('[data-grid-name]').forEach(a=>{
+      a.classList.toggle('grid-fixed',['Fujii Kaze','KHRUANGBIN'].includes(a.dataset.gridName));
+      a.classList.toggle('grid-selected',selected.includes(a.dataset.gridName));
+    });
+    updateNext();
+  }
+  document.addEventListener('click',e=>{if(e.target.closest('.pick-btn'))setTimeout(syncGrid,0)});
+  syncGrid();
+  setInterval(updateNext,60000);
+})();
+</script>
 </body>
 </html>
