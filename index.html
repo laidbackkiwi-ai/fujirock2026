@@ -237,6 +237,44 @@ body{padding-bottom:82px}
 .check-item button{border:0;background:transparent;color:#a40000;font-size:18px;font-weight:900;padding:2px 6px}
 .checklist-note{font-size:11px;color:#666;line-height:1.5}
 
+
+/* Companion v6 — Arrival Planner */
+.planner-card{background:linear-gradient(145deg,#111,#2b2b2b);color:#fff;border-radius:18px;padding:15px;margin-bottom:11px;box-shadow:0 5px 18px rgba(0,0,0,.16)}
+.planner-card h2{font-size:18px;margin:2px 0 4px}
+.planner-card .kicker{color:#bbb}
+.planner-form{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:13px}
+.planner-field{background:rgba(255,255,255,.09);border:1px solid #555;border-radius:12px;padding:9px}
+.planner-field.full{grid-column:1/-1}
+.planner-field label{display:block;font-size:10px;color:#bbb;font-weight:800;margin-bottom:5px}
+.planner-field input,.planner-field select{width:100%;border:0;border-radius:8px;background:#fff;color:#111;padding:9px;font-size:15px;font-weight:800}
+.planner-field input[type="range"]{padding:0;background:transparent}
+.planner-check{display:flex;align-items:center;gap:8px;font-size:12px}
+.planner-check input{width:18px;height:18px}
+.plan-result{background:#fff;color:#111;border-radius:14px;padding:12px;margin-top:12px}
+.plan-result-title{font-size:11px;color:#666;font-weight:900}
+.plan-primary{display:grid;grid-template-columns:1fr auto;align-items:end;gap:8px;margin:5px 0 10px}
+.plan-primary strong{font-size:32px;line-height:1}
+.confidence{font-size:12px;text-align:right}
+.timeline-v6{display:grid;grid-template-columns:64px 22px 1fr;align-items:start}
+.timeline-v6 .tm{font-size:17px;font-weight:900;font-variant-numeric:tabular-nums;padding:8px 0}
+.timeline-v6 .rail{position:relative;min-height:55px}
+.timeline-v6 .rail:before{content:"";position:absolute;left:9px;top:0;bottom:0;width:2px;background:#ccc}
+.timeline-v6 .rail:after{content:"";position:absolute;left:5px;top:12px;width:10px;height:10px;background:#111;border-radius:50%}
+.timeline-v6 .where{padding:7px 0 10px}
+.timeline-v6 .where strong{display:block;font-size:13px}
+.timeline-v6 .where small{display:block;color:#666;margin-top:2px;line-height:1.4}
+.plan-breakdown{margin-top:8px;border-top:1px solid #ddd;padding-top:8px;font-size:11px;color:#555;line-height:1.65}
+.delay-readout{font-size:13px;font-weight:900;margin-top:5px}
+.scenario-row{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:9px}
+.scenario-btn{border:1px solid #aaa;border-radius:9px;background:#f4f4f1;padding:8px 4px;font-size:11px;font-weight:800}
+.scenario-btn.active{background:#111;color:#fff;border-color:#111}
+.live-adjust{background:#fff4d6;border:1px solid #ead08a;border-radius:12px;padding:10px;margin-top:10px;color:#111}
+.live-adjust strong{font-size:13px}
+.source-note{font-size:10px;color:#aaa;line-height:1.45;margin-top:9px}
+.plan-links{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:10px}
+.plan-links a{display:block;text-align:center;text-decoration:none;border-radius:10px;padding:9px 5px;background:#fff;color:#111;font-size:11px;font-weight:900}
+@media(max-width:420px){.planner-form{grid-template-columns:1fr}.planner-field.full{grid-column:auto}.plan-primary strong{font-size:29px}}
+
 </style>
 </head>
 <body>
@@ -247,9 +285,81 @@ body{padding-bottom:82px}
 
 <section class="page active" id="page-go">
   <div class="page-inner">
+
+<div class="planner-card" id="arrivalPlanner">
+  <div class="kicker">VERSION 6｜ARRIVAL PLANNER</div>
+  <h2>🎯 会場到着から逆算</h2>
+  <div class="source-note">2026年7月25日（土）の早朝移動を想定した保守的モデルです。NEXCOの渋滞予測カレンダー・当日の道路情報は下の公式ボタンで確認し、表示された遅れをスライダーで補正できます。</div>
+
+  <div class="planner-form">
+    <div class="planner-field">
+      <label for="targetArrival">会場到着目標</label>
+      <input id="targetArrival" type="time" value="11:00" step="300">
+    </div>
+    <div class="planner-field">
+      <label for="pickupMinutes">中野坂上での合流時間</label>
+      <select id="pickupMinutes">
+        <option value="5">5分</option>
+        <option value="10" selected>10分</option>
+        <option value="15">15分</option>
+        <option value="20">20分</option>
+      </select>
+    </div>
+
+    <div class="planner-field full">
+      <label>土曜朝の混雑シナリオ</label>
+      <div class="scenario-row">
+        <button type="button" class="scenario-btn" data-scenario="light">軽め</button>
+        <button type="button" class="scenario-btn active" data-scenario="standard">標準</button>
+        <button type="button" class="scenario-btn" data-scenario="heavy">混雑</button>
+      </div>
+    </div>
+
+    <div class="planner-field full">
+      <label for="liveDelay">当日の事故・渋滞による追加時間</label>
+      <input id="liveDelay" type="range" min="0" max="90" step="5" value="0">
+      <div class="delay-readout">追加 <span id="liveDelayValue">0</span>分</div>
+    </div>
+
+    <div class="planner-field full">
+      <label class="planner-check"><input id="includeRest" type="checkbox" checked> 関越道で15分休憩を取る</label>
+    </div>
+  </div>
+
+  <div class="plan-result">
+    <div class="plan-result-title">おすすめ出発</div>
+    <div class="plan-primary">
+      <div><span class="mini">市川駅周辺</span><br><strong id="recommendedDeparture">—</strong></div>
+      <div class="confidence"><span id="confidenceStars">★★★★☆</span><br><span id="confidenceText">標準モデル</span></div>
+    </div>
+
+    <div class="timeline-v6">
+      <div class="tm" id="timeIchikawa">—</div><div class="rail"></div><div class="where"><strong>市川 出発</strong><small id="descIchikawa">首都高の余裕を含む</small></div>
+      <div class="tm" id="timeNakanoArrive">—</div><div class="rail"></div><div class="where"><strong>中野坂上 到着</strong><small id="descNakanoArrive">合流・荷物積み込み</small></div>
+      <div class="tm" id="timeNakanoLeave">—</div><div class="rail"></div><div class="where"><strong>中野坂上 出発</strong><small id="descNakanoLeave">関越道へ</small></div>
+      <div class="tm" id="timeKandatsu">—</div><div class="rail"></div><div class="where"><strong>神立駐車場 到着</strong><small id="descKandatsu">駐車・シャトル乗り場へ</small></div>
+      <div class="tm" id="timeVenue">—</div><div class="rail"></div><div class="where"><strong>苗場会場 到着</strong><small>シャトル待ち・約30分乗車・入場までを含む</small></div>
+    </div>
+
+    <div class="plan-breakdown" id="planBreakdown"></div>
+
+    <div class="live-adjust">
+      <strong>当日の使い方</strong><br>
+      出発前にNEXCOまたはJARTICを開き、通常より「＋○分」と見込まれる分を上のスライダーへ入力してください。出発推奨時刻が自動で前倒しされます。
+    </div>
+
+    <div class="plan-links">
+      <a href="https://calendar.driveplaza.com/" target="_blank" rel="noopener">NEXCO渋滞予測</a>
+      <a href="https://www.jartic.or.jp/map/" target="_blank" rel="noopener">JARTIC現在情報</a>
+      <a href="https://www.google.com/maps/dir/?api=1&origin=JR%E5%B8%82%E5%B7%9D%E9%A7%85&destination=%E4%B8%AD%E9%87%8E%E5%9D%82%E4%B8%8A%E9%A7%85&travelmode=driving" target="_blank" rel="noopener">市川→中野 実時間</a>
+      <a href="https://www.google.com/maps/dir/?api=1&origin=%E4%B8%AD%E9%87%8E%E5%9D%82%E4%B8%8A%E9%A7%85&destination=%E7%A5%9E%E7%AB%8B%E9%AB%98%E5%8E%9F%E9%A7%90%E8%BB%8A%E5%A0%B4&travelmode=driving" target="_blank" rel="noopener">中野→神立 実時間</a>
+    </div>
+  </div>
+</div>
+
     <div class="hero-card">
       <div class="kicker">7月25日（土）｜行き</div>
-      <h2>🚗 市川を5:30出発</h2>
+      <h2>🚗 ナビと道路情報</h2>
       <div class="good">中野坂上で合流後、練馬ICから関越道へ。神立駐車場から会場までは公式シャトルで約30分です。</div>
       <div class="nav-label">市川 → 中野坂上</div>
       <div class="nav-choice">
@@ -270,10 +380,10 @@ body{padding-bottom:82px}
 
     <div class="info-card">
       <h2>推奨ルート</h2>
-      <div class="route-line"><div class="route-no">1</div><div><strong>JR市川駅周辺</strong><small>5:30出発目安</small></div></div>
+      <div class="route-line"><div class="route-no">1</div><div><strong>JR市川駅周辺</strong><small><span id="routeDepartureText">Arrival Plannerの推奨時刻</span></small></div></div>
       <div class="route-line"><div class="route-no">2</div><div><strong>中野坂上</strong><small>首都高中央環状線・練馬方面の状況を再確認</small></div></div>
       <div class="route-line"><div class="route-no">3</div><div><strong>練馬IC → 関越道</strong><small>大泉JCT、所沢、東松山、渋川伊香保付近を重点確認</small></div></div>
-      <div class="route-line"><div class="route-no">4</div><div><strong>湯沢IC → 神立駐車場</strong><small>目標到着10:00前後</small></div></div>
+      <div class="route-line"><div class="route-no">4</div><div><strong>湯沢IC → 神立駐車場</strong><small><span id="routeKandatsuText">Arrival Plannerで自動計算</span></small></div></div>
       <div class="route-line"><div class="route-no">5</div><div><strong>神立 → 苗場</strong><small>シャトル約30分。混雑待ち時間は別途見込む</small></div></div>
     </div>
 
@@ -1271,6 +1381,117 @@ if ('serviceWorker' in navigator) {
       render();
     }
   });
+
+  render();
+})();
+</script>
+
+
+<script>
+(function(){
+  const KEY='frc-v6-arrival-planner';
+  const scenarios={
+    light:{
+      label:'軽め',
+      ichikawaNakano:45,
+      nakanoKandatsu:155,
+      trafficBuffer:10,
+      parkingToBus:10,
+      shuttleWait:5,
+      shuttleRide:30,
+      gateWalk:8,
+      stars:'★★★★☆',
+      confidence:'早朝・混雑軽め'
+    },
+    standard:{
+      label:'標準',
+      ichikawaNakano:50,
+      nakanoKandatsu:170,
+      trafficBuffer:20,
+      parkingToBus:10,
+      shuttleWait:10,
+      shuttleRide:30,
+      gateWalk:10,
+      stars:'★★★★☆',
+      confidence:'土曜朝・保守的'
+    },
+    heavy:{
+      label:'混雑',
+      ichikawaNakano:60,
+      nakanoKandatsu:190,
+      trafficBuffer:30,
+      parkingToBus:12,
+      shuttleWait:20,
+      shuttleRide:30,
+      gateWalk:12,
+      stars:'★★★☆☆',
+      confidence:'混雑・余裕重視'
+    }
+  };
+
+  const $=id=>document.getElementById(id);
+  let state={target:'11:00',pickup:10,scenario:'standard',liveDelay:0,rest:true};
+  try{state={...state,...JSON.parse(localStorage.getItem(KEY)||'{}')}}catch(e){}
+
+  function timeToMin(t){
+    const [h,m]=String(t||'11:00').split(':').map(Number);
+    return h*60+m;
+  }
+  function fmt(min){
+    min=((Math.round(min)%1440)+1440)%1440;
+    return String(Math.floor(min/60)).padStart(2,'0')+':'+String(min%60).padStart(2,'0');
+  }
+  function save(){
+    localStorage.setItem(KEY,JSON.stringify(state));
+  }
+  function render(){
+    const s=scenarios[state.scenario]||scenarios.standard;
+    const target=timeToMin(state.target);
+    const rest=state.rest?15:0;
+    const venueTransfer=s.parkingToBus+s.shuttleWait+s.shuttleRide+s.gateWalk;
+    const kandatsu=target-venueTransfer;
+    const nakanoLeave=kandatsu-(s.nakanoKandatsu+s.trafficBuffer+Number(state.liveDelay)+rest);
+    const nakanoArrive=nakanoLeave-Number(state.pickup);
+    const ichikawa=nakanoArrive-s.ichikawaNakano;
+
+    $('recommendedDeparture').textContent=fmt(ichikawa);
+    $('timeIchikawa').textContent=fmt(ichikawa);
+    $('timeNakanoArrive').textContent=fmt(nakanoArrive);
+    $('timeNakanoLeave').textContent=fmt(nakanoLeave);
+    $('timeKandatsu').textContent=fmt(kandatsu);
+    $('timeVenue').textContent=fmt(target);
+    $('confidenceStars').textContent=s.stars;
+    $('confidenceText').textContent=s.confidence;
+    $('liveDelayValue').textContent=state.liveDelay;
+    $('descIchikawa').textContent='中野坂上まで'+s.ichikawaNakano+'分想定';
+    $('descNakanoArrive').textContent='合流・荷物積み込み '+state.pickup+'分';
+    $('descNakanoLeave').textContent='中野→神立 '+s.nakanoKandatsu+'分＋暦・混雑余裕'+s.trafficBuffer+'分'+(state.liveDelay?'+当日補正'+state.liveDelay+'分':'')+(rest?'+休憩15分':'');
+    $('descKandatsu').textContent='駐車・待機・シャトル・入場 '+venueTransfer+'分';
+    $('planBreakdown').innerHTML=
+      '計算内訳：市川→中野坂上 '+s.ichikawaNakano+'分 ／ 合流 '+state.pickup+'分 ／ 中野坂上→神立 '+s.nakanoKandatsu+'分 ／ 土曜朝余裕 '+s.trafficBuffer+'分 ／ 当日補正 '+state.liveDelay+'分 ／ 休憩 '+rest+'分 ／ 神立→会場 '+venueTransfer+'分。<br>'+
+      '総所要時間：'+(target-ichikawa)+'分（約'+Math.floor((target-ichikawa)/60)+'時間'+((target-ichikawa)%60)+'分）';
+    const routeDep=$('routeDepartureText');
+    const routeKan=$('routeKandatsuText');
+    if(routeDep)routeDep.textContent=fmt(ichikawa)+'出発推奨';
+    if(routeKan)routeKan.textContent=fmt(kandatsu)+'到着目標';
+
+    document.querySelectorAll('.scenario-btn').forEach(b=>b.classList.toggle('active',b.dataset.scenario===state.scenario));
+    save();
+  }
+
+  $('targetArrival').value=state.target;
+  $('pickupMinutes').value=String(state.pickup);
+  $('liveDelay').value=String(state.liveDelay);
+  $('includeRest').checked=!!state.rest;
+
+  $('targetArrival').addEventListener('input',e=>{state.target=e.target.value||'11:00';render();});
+  $('pickupMinutes').addEventListener('change',e=>{state.pickup=Number(e.target.value);render();});
+  $('liveDelay').addEventListener('input',e=>{state.liveDelay=Number(e.target.value);render();});
+  $('includeRest').addEventListener('change',e=>{state.rest=e.target.checked;render();});
+  document.querySelectorAll('.scenario-btn').forEach(b=>b.addEventListener('click',()=>{
+    state.scenario=b.dataset.scenario;
+    render();
+  }));
 
   render();
 })();
