@@ -227,6 +227,16 @@ body{padding-bottom:82px}
 .alert-box{background:#fff4d6;border:1px solid #ead08a;border-radius:10px;padding:9px;font-size:11px;line-height:1.5;margin-top:8px}
 @media(max-width:410px){.dashboard-grid{grid-template-columns:1fr}.dash-card.full{grid-column:auto}}
 
+
+.editable-checklist-controls{display:grid;grid-template-columns:1fr auto;gap:8px;margin:10px 0}
+.editable-checklist-controls input{border:1px solid #bbb;border-radius:10px;padding:10px;font-size:14px}
+.editable-checklist-controls button{border:0;border-radius:10px;background:#111;color:#fff;padding:10px 13px;font-weight:800}
+.check-item{display:grid;grid-template-columns:auto 1fr auto;gap:9px;align-items:center;padding:10px 2px;border-bottom:1px solid #eee}
+.check-item input[type="checkbox"]{width:19px;height:19px}
+.check-item span{font-size:14px}
+.check-item button{border:0;background:transparent;color:#a40000;font-size:18px;font-weight:900;padding:2px 6px}
+.checklist-note{font-size:11px;color:#666;line-height:1.5}
+
 </style>
 </head>
 <body>
@@ -267,19 +277,20 @@ body{padding-bottom:82px}
       <div class="route-line"><div class="route-no">5</div><div><strong>神立 → 苗場</strong><small>シャトル約30分。混雑待ち時間は別途見込む</small></div></div>
     </div>
 
-    <div class="info-card">
-      <h2>出発チェック</h2>
-      <div class="checklist" data-list="go">
-        <label><input type="checkbox">入場チケット・駐車券</label>
-        <label><input type="checkbox">財布・免許証・ETCカード</label>
-        <label><input type="checkbox">スマホ・モバイルバッテリー</label>
-        <label><input type="checkbox">雨具・防寒着・帽子</label>
-        <label><input type="checkbox">飲み物（缶は会場持込不可）</label>
-        <label><input type="checkbox">折りたたみ椅子・敷物</label>
-        <label><input type="checkbox">着替え・タオル・温泉セット</label>
-        <label><input type="checkbox">仮眠用アイマスク・耳栓</label>
-      </div>
-    </div>
+    
+<div class="info-card">
+  <h2>出発チェック</h2>
+  <div class="editable-checklist-controls">
+    <input id="goItemInput" type="text" placeholder="持ち物や確認事項を追加">
+    <button id="goItemAddBtn" type="button">追加</button>
+  </div>
+  <div id="goEditableChecklist"></div>
+  <p class="checklist-note">追加・削除・チェック状態はこの端末に保存されます。削除した項目は下の「初期状態に戻す」で復元できます。</p>
+  <div class="dash-actions">
+    <button class="mini-btn" id="goChecklistResetBtn" type="button">初期状態に戻す</button>
+  </div>
+</div>
+
 
     <div class="info-card">
       <h2>休憩候補</h2>
@@ -1171,6 +1182,97 @@ if ('serviceWorker' in navigator) {
     }catch(e){}
   }else loadWeather();
   setInterval(updateConcierge,60000);
+})();
+</script>
+
+
+<script>
+(function(){
+  const KEY='frc-v5-go-editable-checklist';
+  const defaults=[
+    '入場チケット・駐車券',
+    '財布・免許証・ETCカード',
+    'スマホ・モバイルバッテリー',
+    '雨具・防寒着・帽子',
+    '飲み物（缶は会場持込不可）',
+    '折りたたみ椅子・敷物',
+    '着替え・タオル・温泉セット',
+    '仮眠用アイマスク・耳栓'
+  ];
+
+  let items=[];
+  try{
+    const saved=JSON.parse(localStorage.getItem(KEY)||'null');
+    items=Array.isArray(saved)?saved:defaults.map((text,i)=>({id:'d'+i,text,checked:false}));
+  }catch(e){
+    items=defaults.map((text,i)=>({id:'d'+i,text,checked:false}));
+  }
+
+  const box=document.getElementById('goEditableChecklist');
+  const input=document.getElementById('goItemInput');
+  const addBtn=document.getElementById('goItemAddBtn');
+  const resetBtn=document.getElementById('goChecklistResetBtn');
+
+  function save(){
+    localStorage.setItem(KEY,JSON.stringify(items));
+  }
+  function render(){
+    if(!box)return;
+    if(items.length===0){
+      box.innerHTML='<div class="mini" style="padding:8px 0">項目がありません。上から追加してください。</div>';
+      return;
+    }
+    box.innerHTML=items.map(item=>
+      '<div class="check-item" data-id="'+item.id+'">'+
+        '<input type="checkbox" '+(item.checked?'checked':'')+' aria-label="'+escapeHtml(item.text)+'">'+
+        '<span>'+escapeHtml(item.text)+'</span>'+
+        '<button type="button" aria-label="削除">×</button>'+
+      '</div>'
+    ).join('');
+  }
+  function escapeHtml(s){
+    return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
+  }
+  function addItem(){
+    const text=input.value.trim();
+    if(!text)return;
+    items.push({id:'u'+Date.now()+Math.random().toString(16).slice(2),text,checked:false});
+    input.value='';
+    save();
+    render();
+    input.focus();
+  }
+
+  addBtn?.addEventListener('click',addItem);
+  input?.addEventListener('keydown',e=>{
+    if(e.key==='Enter'){e.preventDefault();addItem();}
+  });
+  box?.addEventListener('change',e=>{
+    if(e.target.type!=='checkbox')return;
+    const row=e.target.closest('.check-item');
+    const item=items.find(x=>x.id===row?.dataset.id);
+    if(item){item.checked=e.target.checked;save();}
+  });
+  box?.addEventListener('click',e=>{
+    if(e.target.tagName!=='BUTTON')return;
+    const row=e.target.closest('.check-item');
+    const item=items.find(x=>x.id===row?.dataset.id);
+    if(!item)return;
+    if(confirm('「'+item.text+'」を削除しますか？')){
+      items=items.filter(x=>x.id!==item.id);
+      save();
+      render();
+    }
+  });
+  resetBtn?.addEventListener('click',()=>{
+    if(confirm('出発チェックを初期状態に戻しますか？')){
+      items=defaults.map((text,i)=>({id:'d'+i,text,checked:false}));
+      save();
+      render();
+    }
+  });
+
+  render();
 })();
 </script>
 
