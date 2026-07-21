@@ -275,6 +275,44 @@ body{padding-bottom:82px}
 .plan-links a{display:block;text-align:center;text-decoration:none;border-radius:10px;padding:9px 5px;background:#fff;color:#111;font-size:11px;font-weight:900}
 @media(max-width:420px){.planner-form{grid-template-columns:1fr}.planner-field.full{grid-column:auto}.plan-primary strong{font-size:29px}}
 
+
+/* Companion v7 — Group Mode */
+.bottom-nav{grid-template-columns:repeat(4,1fr)}
+.group-hero{background:linear-gradient(145deg,#182c25,#315b4b);color:#fff;border-radius:18px;padding:16px;margin-bottom:12px;box-shadow:0 5px 18px rgba(0,0,0,.16)}
+.group-hero h2{margin:2px 0 6px;font-size:20px}
+.group-note{font-size:11px;line-height:1.55;color:#d8ebe3}
+.group-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:12px}
+.group-field{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.28);border-radius:12px;padding:9px}
+.group-field.full{grid-column:1/-1}
+.group-field label{display:block;font-size:10px;color:#d8ebe3;font-weight:900;margin-bottom:5px}
+.group-field input,.group-field select,.group-field textarea{width:100%;box-sizing:border-box;border:0;border-radius:8px;padding:10px;background:#fff;color:#111;font-size:14px;font-weight:750}
+.group-field textarea{min-height:68px;resize:vertical}
+.group-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.group-actions button,.group-actions a{border:0;border-radius:11px;padding:11px 8px;font-weight:900;font-size:12px;text-align:center;text-decoration:none}
+.group-actions .primary{background:#fff;color:#173329}
+.group-actions .secondary{background:#d9eee6;color:#173329}
+.group-actions .danger{background:#ffe1dd;color:#7d2118}
+.room-code{font-size:31px;font-weight:950;letter-spacing:.12em;line-height:1;text-align:center;margin:8px 0}
+.member-board{display:grid;gap:8px;margin-top:10px}
+.member-card{background:#fff;border:1px solid #d6d6d0;border-radius:13px;padding:11px}
+.member-card .top{display:flex;justify-content:space-between;gap:8px;align-items:center}
+.member-card strong{font-size:14px}
+.member-card small{color:#666}
+.member-status{margin-top:7px;font-size:13px;line-height:1.45}
+.member-meta{display:flex;gap:7px;flex-wrap:wrap;margin-top:7px}
+.member-meta span{font-size:10px;background:#f0f0ec;border-radius:999px;padding:5px 7px}
+.quick-status{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:8px}
+.quick-status button{border:1px solid #9a9a93;background:#fff;border-radius:9px;padding:8px 4px;font-size:11px;font-weight:850}
+.group-share-card{background:#f5f2e8;border:1px solid #ddd5bd;border-radius:14px;padding:12px;margin-top:11px}
+.group-share-card h3{font-size:14px;margin:0 0 6px}
+.group-share-card p{font-size:11px;color:#555;line-height:1.55;margin:4px 0}
+.copy-row{display:grid;grid-template-columns:1fr auto;gap:7px;margin-top:8px}
+.copy-row input{min-width:0;border:1px solid #bbb;border-radius:9px;padding:9px;font-size:11px}
+.copy-row button{border:0;border-radius:9px;background:#111;color:#fff;padding:8px 11px;font-weight:850}
+.sync-badge{display:inline-block;border-radius:999px;padding:5px 8px;background:#fff1bf;color:#6f5000;font-size:10px;font-weight:900}
+.group-empty{padding:18px;text-align:center;color:#777;font-size:12px;border:1px dashed #bbb;border-radius:12px}
+@media(max-width:420px){.group-grid{grid-template-columns:1fr}.group-field.full{grid-column:auto}}
+
 </style>
 </head>
 <body>
@@ -906,10 +944,114 @@ body{padding-bottom:82px}
   </div>
 </section>
 
+
+<section class="page" id="page-group">
+  <div class="page-inner">
+    <div class="group-hero">
+      <div class="kicker">VERSION 7｜GROUP MODE</div>
+      <h2>👥 仲間と使う</h2>
+      <div class="group-note">
+        招待リンクとチェックインリンクをLINEなどで共有できます。GitHub Pagesだけで動くため、現在のVersion 7はサーバーを使わない「リンク共有方式」です。
+      </div>
+
+      <div class="group-grid">
+        <div class="group-field">
+          <label for="groupName">グループ名</label>
+          <input id="groupName" placeholder="例：市川フジロック隊">
+        </div>
+        <div class="group-field">
+          <label for="memberName">自分の名前</label>
+          <input id="memberName" placeholder="例：鉄平">
+        </div>
+        <div class="group-field full">
+          <label>グループコード</label>
+          <div class="room-code" id="roomCode">------</div>
+          <div style="text-align:center"><span class="sync-badge">リンク共有型</span></div>
+        </div>
+      </div>
+
+      <div class="group-actions">
+        <button class="primary" id="createGroupBtn" type="button">グループ作成</button>
+        <button class="secondary" id="shareInviteBtn" type="button">招待リンク共有</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">📍 今の状況を共有</div>
+      <div class="group-grid">
+        <div class="group-field">
+          <label for="statusPlace">現在地・行き先</label>
+          <select id="statusPlace">
+            <option>GREEN STAGE</option>
+            <option>WHITE STAGE</option>
+            <option>RED MARQUEE</option>
+            <option>FIELD OF HEAVEN</option>
+            <option>OASIS</option>
+            <option>神立駐車場</option>
+            <option>シャトル移動中</option>
+            <option>その他</option>
+          </select>
+        </div>
+        <div class="group-field">
+          <label for="statusEta">集合まで</label>
+          <select id="statusEta">
+            <option value="">指定なし</option>
+            <option value="5">5分</option>
+            <option value="10">10分</option>
+            <option value="15">15分</option>
+            <option value="30">30分</option>
+          </select>
+        </div>
+        <div class="group-field full">
+          <label for="statusMessage">ひとこと</label>
+          <textarea id="statusMessage" placeholder="例：OASISで昼食中。12:45にGREENへ向かいます"></textarea>
+        </div>
+      </div>
+
+      <div class="quick-status">
+        <button type="button" data-quick="今ここにいます">今ここ</button>
+        <button type="button" data-quick="次のステージへ移動中">移動中</button>
+        <button type="button" data-quick="少し休憩しています">休憩中</button>
+      </div>
+
+      <div class="group-actions">
+        <button class="primary" id="shareStatusBtn" type="button">状況を共有</button>
+        <button class="secondary" id="addSelfCheckinBtn" type="button">自分のボードに記録</button>
+      </div>
+    </div>
+
+    <div class="group-share-card">
+      <h3>招待・チェックインの仕組み</h3>
+      <p>招待リンクを開くと、グループ名とコードが相手の端末へ保存されます。メンバーが送った「状況共有リンク」を開くと、その人の最新チェックインが下のボードへ追加されます。</p>
+      <div class="copy-row">
+        <input id="inviteUrl" readonly value="グループを作成してください">
+        <button type="button" id="copyInviteBtn">コピー</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">🧭 メンバーボード</div>
+      <div id="memberBoard" class="member-board"></div>
+      <div class="group-actions">
+        <button type="button" class="danger" id="clearBoardBtn">ボードを消去</button>
+        <button type="button" class="secondary" id="refreshLocationBtn">GPSで現在地を添付</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">🔐 プライバシー</div>
+      <p class="small">
+        GPSは端末上で取得し、共有ボタンを押したときだけリンク文面に含めます。Version 7では位置情報を外部サーバーへ常時送信しません。
+      </p>
+    </div>
+  </div>
+</section>
+
 <nav class="bottom-nav" aria-label="メインメニュー">
   <button class="active" data-page="go">🚗<br>行き</button>
   <button data-page="fes">🎵<br>フェス</button>
   <button data-page="back">♨️<br>帰り</button>
+  <button data-page="group">👥<br>仲間</button>
 </nav>
 
 <script>
@@ -963,7 +1105,7 @@ if ('serviceWorker' in navigator) {
 </script>
 <script>
 (function(){
-  const pages={go:document.getElementById('page-go'),fes:document.getElementById('page-fes'),back:document.getElementById('page-back')};
+  const pages={go:document.getElementById('page-go'),fes:document.getElementById('page-fes'),back:document.getElementById('page-back'),group:document.getElementById('page-group')};
   const nav=[...document.querySelectorAll('.bottom-nav button')];
   function openPage(name){
     Object.entries(pages).forEach(([k,v])=>v.classList.toggle('active',k===name));
@@ -1494,6 +1636,197 @@ if ('serviceWorker' in navigator) {
   }));
 
   render();
+})();
+</script>
+
+
+<script>
+(function(){
+  const PROFILE_KEY='frc-v7-group-profile';
+  const BOARD_KEY='frc-v7-group-board';
+  const GPS_KEY='frc-v7-group-gps';
+  const $=id=>document.getElementById(id);
+  let profile={groupName:'',memberName:'',code:''};
+  let board=[];
+  let gps=null;
+
+  try{ profile={...profile,...JSON.parse(localStorage.getItem(PROFILE_KEY)||'{}')}; }catch(e){}
+  try{ board=JSON.parse(localStorage.getItem(BOARD_KEY)||'[]'); }catch(e){board=[];}
+  try{ gps=JSON.parse(localStorage.getItem(GPS_KEY)||'null'); }catch(e){gps=null;}
+
+  function esc(s){
+    return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  }
+  function code(){
+    return String(Math.floor(100000+Math.random()*900000));
+  }
+  function baseUrl(){
+    return location.origin+location.pathname;
+  }
+  function b64(obj){
+    return btoa(unescape(encodeURIComponent(JSON.stringify(obj))))
+      .replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
+  }
+  function unb64(s){
+    s=s.replace(/-/g,'+').replace(/_/g,'/');
+    while(s.length%4)s+='=';
+    return JSON.parse(decodeURIComponent(escape(atob(s))));
+  }
+  function inviteLink(){
+    if(!profile.code)return '';
+    return baseUrl()+'?join='+encodeURIComponent(b64({
+      g:profile.groupName,c:profile.code
+    }))+'#group';
+  }
+  function statusLink(item){
+    return baseUrl()+'?checkin='+encodeURIComponent(b64(item))+'#group';
+  }
+  function save(){
+    localStorage.setItem(PROFILE_KEY,JSON.stringify(profile));
+    localStorage.setItem(BOARD_KEY,JSON.stringify(board.slice(0,30)));
+  }
+  function currentTime(){
+    return new Date().toLocaleString('ja-JP',{month:'numeric',day:'numeric',hour:'2-digit',minute:'2-digit'});
+  }
+  function renderProfile(){
+    $('groupName').value=profile.groupName||'';
+    $('memberName').value=profile.memberName||'';
+    $('roomCode').textContent=profile.code||'------';
+    $('inviteUrl').value=inviteLink()||'グループを作成してください';
+  }
+  function renderBoard(){
+    if(!board.length){
+      $('memberBoard').innerHTML='<div class="group-empty">まだチェックインはありません。<br>仲間から届いた状況共有リンクを開くと、ここに追加されます。</div>';
+      return;
+    }
+    $('memberBoard').innerHTML=board.map((x,i)=>`
+      <div class="member-card">
+        <div class="top">
+          <strong>${esc(x.name||'メンバー')}</strong>
+          <small>${esc(x.time||'')}</small>
+        </div>
+        <div class="member-status">📍 <b>${esc(x.place||'場所不明')}</b><br>${esc(x.message||'')}</div>
+        <div class="member-meta">
+          ${x.eta?`<span>集合まで約${esc(x.eta)}分</span>`:''}
+          ${x.lat?`<span>GPS ${Number(x.lat).toFixed(4)}, ${Number(x.lon).toFixed(4)}</span>`:''}
+          <span>コード ${esc(x.code||'—')}</span>
+        </div>
+      </div>`).join('');
+  }
+  function makeCheckin(){
+    return {
+      type:'frc-checkin-v1',
+      code:profile.code,
+      group:profile.groupName,
+      name:profile.memberName||'メンバー',
+      place:$('statusPlace').value,
+      eta:$('statusEta').value,
+      message:$('statusMessage').value.trim(),
+      time:currentTime(),
+      ts:Date.now(),
+      lat:gps?.lat||null,
+      lon:gps?.lon||null
+    };
+  }
+  async function share(title,text,url){
+    if(navigator.share){
+      try{await navigator.share({title,text,url});return;}catch(e){}
+    }
+    await navigator.clipboard.writeText(text+'\n'+url);
+    alert('共有内容をコピーしました。LINEなどへ貼り付けてください。');
+  }
+  function importParams(){
+    const p=new URLSearchParams(location.search);
+    try{
+      if(p.get('join')){
+        const x=unb64(p.get('join'));
+        if(x.c){
+          profile.groupName=x.g||profile.groupName;
+          profile.code=x.c;
+          save();
+          alert('グループ「'+(profile.groupName||profile.code)+'」に参加しました。自分の名前を入力してください。');
+        }
+      }
+      if(p.get('checkin')){
+        const x=unb64(p.get('checkin'));
+        if(x.type==='frc-checkin-v1'){
+          if(profile.code && x.code!==profile.code){
+            alert('別のグループのチェックインです。');
+          }else{
+            if(!profile.code){profile.code=x.code||'';profile.groupName=x.group||'';}
+            board=board.filter(y=>!(y.name===x.name && y.code===x.code));
+            board.unshift(x);
+            save();
+            alert((x.name||'メンバー')+'のチェックインを追加しました。');
+          }
+        }
+      }
+    }catch(e){
+      alert('共有リンクを読み取れませんでした。');
+    }
+    if(p.get('join')||p.get('checkin')){
+      history.replaceState({},'',baseUrl()+'#group');
+      localStorage.setItem('frc-page','group');
+    }
+  }
+
+  $('createGroupBtn').addEventListener('click',()=>{
+    const g=$('groupName').value.trim();
+    const n=$('memberName').value.trim();
+    if(!g||!n){alert('グループ名と自分の名前を入力してください。');return;}
+    profile={groupName:g,memberName:n,code:profile.code||code()};
+    save();renderProfile();
+  });
+  $('groupName').addEventListener('change',e=>{profile.groupName=e.target.value.trim();save();renderProfile();});
+  $('memberName').addEventListener('change',e=>{profile.memberName=e.target.value.trim();save();});
+  $('shareInviteBtn').addEventListener('click',()=>{
+    if(!profile.code){alert('先にグループを作成してください。');return;}
+    share('Fuji Rock グループ招待',
+      '「'+profile.groupName+'」へ参加してください。グループコード：'+profile.code,
+      inviteLink());
+  });
+  $('copyInviteBtn').addEventListener('click',async()=>{
+    if(!profile.code){alert('先にグループを作成してください。');return;}
+    await navigator.clipboard.writeText(inviteLink());
+    alert('招待リンクをコピーしました。');
+  });
+  document.querySelectorAll('[data-quick]').forEach(b=>b.addEventListener('click',()=>{
+    $('statusMessage').value=b.dataset.quick;
+  }));
+  $('addSelfCheckinBtn').addEventListener('click',()=>{
+    if(!profile.code||!profile.memberName){alert('グループを作成し、自分の名前を入力してください。');return;}
+    const x=makeCheckin();
+    board=board.filter(y=>!(y.name===x.name&&y.code===x.code));
+    board.unshift(x);save();renderBoard();
+  });
+  $('shareStatusBtn').addEventListener('click',()=>{
+    if(!profile.code||!profile.memberName){alert('グループを作成し、自分の名前を入力してください。');return;}
+    const x=makeCheckin();
+    board=board.filter(y=>!(y.name===x.name&&y.code===x.code));
+    board.unshift(x);save();renderBoard();
+    const text='【'+profile.groupName+'】'+x.name+'：'+x.place+
+      (x.message?'｜'+x.message:'')+(x.eta?'｜集合まで約'+x.eta+'分':'');
+    share('Fuji Rock チェックイン',text,statusLink(x));
+  });
+  $('clearBoardBtn').addEventListener('click',()=>{
+    if(confirm('メンバーボードを消去しますか？')){board=[];save();renderBoard();}
+  });
+  $('refreshLocationBtn').addEventListener('click',()=>{
+    if(!navigator.geolocation){alert('この端末ではGPSを利用できません。');return;}
+    $('refreshLocationBtn').textContent='取得中…';
+    navigator.geolocation.getCurrentPosition(pos=>{
+      gps={lat:pos.coords.latitude,lon:pos.coords.longitude,accuracy:Math.round(pos.coords.accuracy),ts:Date.now()};
+      localStorage.setItem(GPS_KEY,JSON.stringify(gps));
+      $('refreshLocationBtn').textContent='GPS取得済み ±'+gps.accuracy+'m';
+    },()=>{
+      $('refreshLocationBtn').textContent='GPSで現在地を添付';
+      alert('位置情報を取得できませんでした。Safariの位置情報許可を確認してください。');
+    },{enableHighAccuracy:true,timeout:12000,maximumAge:60000});
+  });
+
+  importParams();
+  renderProfile();
+  renderBoard();
 })();
 </script>
 
