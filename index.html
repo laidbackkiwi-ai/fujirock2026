@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="FUJI ROCK">
-<title>FUJI ROCK 2026｜7/25 SAT スマホ版</title>
+<title>FUJI ROCK 2026｜7/25 SAT・自由選択版 スマホ版</title>
 <style>
 :root{--bg:#f4f4f1;--ink:#111;--muted:#676767;--card:#fff;--line:#d8d8d2}
 *{box-sizing:border-box}
@@ -130,19 +130,48 @@ footer{font-size:11px;color:#777;padding:18px 3px;text-align:center}
 #f-red:checked ~ .filters label[for="f-red"],
 #f-field:checked ~ .filters label[for="f-field"],
 #f-orange:checked ~ .filters label[for="f-orange"],
-#f-must:checked ~ .filters label[for="f-must"]{background:#111;color:#fff;border-color:#111}
+#f-selected:checked ~ .filters label[for="f-selected"]{background:#111;color:#fff;border-color:#111}
 #f-green:checked ~ main .event:not([data-stage="green"]),
 #f-white:checked ~ main .event:not([data-stage="white"]),
 #f-red:checked ~ main .event:not([data-stage="red"]),
 #f-field:checked ~ main .event:not([data-stage="field"]),
 #f-orange:checked ~ main .event:not([data-stage="orange"]),
-#f-must:checked ~ main .event:not(.must){display:none}
+#f-selected:checked ~ main .event:not(.selected):not(.fixed){display:none}
+
+
+.event.fixed{outline:2px solid #111;background:#fff7ba}
+.event.selected{outline:2px solid #3178c6;background:#eef6ff}
+.pick-btn{
+  display:block;
+  margin-top:8px;
+  border:1px solid #8b8b85;
+  background:#fff;
+  border-radius:999px;
+  padding:6px 10px;
+  font-size:11px;
+  font-weight:800;
+  color:#222;
+}
+.event.selected .pick-btn{background:#3178c6;color:#fff;border-color:#3178c6}
+.fixed-btn{background:#111!important;color:#fff!important;border-color:#111!important}
+.selected-summary{
+  position:sticky;
+  top:137px;
+  z-index:14;
+  margin:0 14px 7px;
+  padding:9px 11px;
+  border-radius:11px;
+  background:#e9f2ff;
+  border:1px solid #b7d0ee;
+  font-size:12px;
+  font-weight:700;
+}
 
 </style>
 </head>
 <body>
 <header>
-  <h1>FUJI ROCK 2026｜7/25 SAT</h1>
+  <h1>FUJI ROCK 2026｜7/25 SAT・自由選択版</h1>
   <div class="sub">GREEN → ORANGE ECHO｜アーティスト名タップで公式紹介ページ</div>
   <input class="view-radio" type="radio" name="view" id="view-list" checked>
   <input class="view-radio" type="radio" name="view" id="view-grid">
@@ -160,7 +189,7 @@ footer{font-size:11px;color:#777;padding:18px 3px;text-align:center}
 <input class="filter-radio" type="radio" name="filter" id="f-red">
 <input class="filter-radio" type="radio" name="filter" id="f-field">
 <input class="filter-radio" type="radio" name="filter" id="f-orange">
-<input class="filter-radio" type="radio" name="filter" id="f-must">
+<input class="filter-radio" type="radio" name="filter" id="f-selected">
 <div class="filters">
   <label class="filter" for="f-all">すべて</label>
   <label class="filter" for="f-green">GREEN</label>
@@ -168,289 +197,290 @@ footer{font-size:11px;color:#777;padding:18px 3px;text-align:center}
   <label class="filter" for="f-red">RED</label>
   <label class="filter" for="f-field">FIELD</label>
   <label class="filter" for="f-orange">ORANGE</label>
-  <label class="filter" for="f-must">★ マスト</label>
+  <label class="filter" for="f-selected">★ 今日見る</label>
 </div>
+<div class="selected-summary" id="selectedSummary">固定：Fujii Kaze・KHRUANGBIN</div>
 <main>
-  <div class="notice">黄色枠＝マスト、点線枠＝候補。ステージボタンで絞り込みできます。</div>
-  <article class="event red " data-stage="red">
+  <div class="notice">藤井風とKHRUANGBINは固定。ほかは「＋ 今日見る」で当日追加・解除できます。</div>
+  <article data-name="ブランデー戦記" class="event red " data-stage="red">
       <div class="time">10:20<span>–11:00</span></div>
       <div class="body">
         <div class="stage">RED</div>
         <a href="https://fujirockfestival.com/artist/detail/6858" target="_blank" rel="noopener">ブランデー戦記 <span class="link">↗</span></a>
         
-      </div>
+      <button class="pick-btn" type="button">＋ 今日見る</button></div>
     </article>
-<article class="event orange " data-stage="orange">
+<article data-name="来島エル" class="event orange " data-stage="orange">
       <div class="time">10:50<span>–11:30</span></div>
       <div class="body">
         <div class="stage">ORANGE</div>
         <a href="https://fujirockfestival.com/artist/detail/6914" target="_blank" rel="noopener">来島エル <span class="link">↗</span></a>
         
-      </div>
+      <button class="pick-btn" type="button">＋ 今日見る</button></div>
     </article>
-<article class="event green " data-stage="green">
+<article data-name="Bialystocks" class="event green " data-stage="green">
       <div class="time">11:00<span>–12:00</span></div>
       <div class="body">
         <div class="stage">GREEN</div>
         <a href="https://fujirockfestival.com/artist/detail/6856" target="_blank" rel="noopener">Bialystocks <span class="link">↗</span></a>
         
-      </div>
+      <button class="pick-btn" type="button">＋ 今日見る</button></div>
     </article>
-<article class="event field must" data-stage="field">
+<article data-name="柴田聡子 (BAND SET)" class="event field" data-stage="field">
       <div class="time">11:10<span>–12:00</span></div>
       <div class="body">
         <div class="stage">FIELD</div>
         <a href="https://fujirockfestival.com/artist/detail/6557" target="_blank" rel="noopener">柴田聡子 (BAND SET) <span class="link">↗</span></a>
-        <span class="priority">★ マスト</span>
-      </div>
+        
+      <button class="pick-btn" type="button">＋ 今日見る</button></div>
     </article>
-<article class="event red " data-stage="red">
+<article data-name="SIX LOUNGE" class="event red " data-stage="red">
       <div class="time">11:30<span>–12:10</span></div>
       <div class="body">
         <div class="stage">RED</div>
         <a href="https://fujirockfestival.com/artist/detail/4586" target="_blank" rel="noopener">SIX LOUNGE <span class="link">↗</span></a>
         
-      </div>
+      <button class="pick-btn" type="button">＋ 今日見る</button></div>
     </article>
-<article class="event white " data-stage="white">
+<article data-name="Riddim Saunter" class="event white " data-stage="white">
       <div class="time">12:10<span>–13:00</span></div>
       <div class="body">
         <div class="stage">WHITE</div>
         <a href="https://fujirockfestival.com/artist/detail/1437" target="_blank" rel="noopener">Riddim Saunter <span class="link">↗</span></a>
         
-      </div>
+      <button class="pick-btn" type="button">＋ 今日見る</button></div>
     </article>
-<article class="event orange " data-stage="orange">
+<article data-name="タデクイ" class="event orange " data-stage="orange">
       <div class="time">12:15<span>–12:55</span></div>
       <div class="body">
         <div class="stage">ORANGE</div>
         <a href="https://fujirockfestival.com/artist/detail/6913" target="_blank" rel="noopener">タデクイ <span class="link">↗</span></a>
         
-      </div>
+      <button class="pick-btn" type="button">＋ 今日見る</button></div>
     </article>
-<article class="event red must" data-stage="red">
+<article data-name="QUADECA" class="event red" data-stage="red">
       <div class="time">12:40<span>–13:30</span></div>
       <div class="body">
         <div class="stage">RED</div>
         <a href="https://fujirockfestival.com/artist/detail/6862" target="_blank" rel="noopener">QUADECA <span class="link">↗</span></a>
-        <span class="priority">★ マスト</span>
-      </div>
+        
+      <button class="pick-btn" type="button">＋ 今日見る</button></div>
     </article>
-<article class="event field " data-stage="field">
+<article data-name="YUUF" class="event field " data-stage="field">
       <div class="time">12:50<span>–13:50</span></div>
       <div class="body">
         <div class="stage">FIELD</div>
         <a href="https://fujirockfestival.com/artist/detail/6864" target="_blank" rel="noopener">YUUF <span class="link">↗</span></a>
         
-      </div>
+      <button class="pick-btn" type="button">＋ 今日見る</button></div>
     </article>
-<article class="event green " data-stage="green">
+<article data-name="Trueno" class="event green " data-stage="green">
       <div class="time">13:00<span>–14:00</span></div>
       <div class="body">
         <div class="stage">GREEN</div>
         <a href="https://fujirockfestival.com/artist/detail/6863" target="_blank" rel="noopener">Trueno <span class="link">↗</span></a>
         
-      </div>
+      <button class="pick-btn" type="button">＋ 今日見る</button></div>
     </article>
-<article class="event white maybe" data-stage="white">
+<article data-name="BOHEMIAN BETYARS" class="event white" data-stage="white">
       <div class="time">13:50<span>–14:40</span></div>
       <div class="body">
         <div class="stage">WHITE</div>
         <a href="https://fujirockfestival.com/artist/detail/6857" target="_blank" rel="noopener">BOHEMIAN BETYARS <span class="link">↗</span></a>
-        <span class="priority maybe-b">候補</span>
-      </div>
+        
+      <button class="pick-btn" type="button">＋ 今日見る</button></div>
     </article>
-<article class="event orange maybe" data-stage="orange">
+<article data-name="neco眠る" class="event orange" data-stage="orange">
       <div class="time">13:50<span>–14:30</span></div>
       <div class="body">
         <div class="stage">ORANGE</div>
         <a href="https://fujirockfestival.com/artist/detail/2926" target="_blank" rel="noopener">neco眠る <span class="link">↗</span></a>
-        <span class="priority maybe-b">候補</span>
-      </div>
+        
+      <button class="pick-btn" type="button">＋ 今日見る</button></div>
     </article>
-<article class="event red maybe" data-stage="red">
+<article data-name="THE BETHS" class="event red" data-stage="red">
       <div class="time">14:00<span>–15:00</span></div>
       <div class="body">
         <div class="stage">RED</div>
         <a href="https://fujirockfestival.com/artist/detail/6822" target="_blank" rel="noopener">THE BETHS <span class="link">↗</span></a>
-        <span class="priority maybe-b">候補</span>
-      </div>
+        
+      <button class="pick-btn" type="button">＋ 今日見る</button></div>
     </article>
-<article class="event field " data-stage="field">
+<article data-name="LA LOM" class="event field " data-stage="field">
       <div class="time">14:40<span>–15:40</span></div>
       <div class="body">
         <div class="stage">FIELD</div>
         <a href="https://fujirockfestival.com/artist/detail/6861" target="_blank" rel="noopener">LA LOM <span class="link">↗</span></a>
         
-      </div>
+      <button class="pick-btn" type="button">＋ 今日見る</button></div>
     </article>
-<article class="event green " data-stage="green">
+<article data-name="IO" class="event green " data-stage="green">
       <div class="time">15:00<span>–16:00</span></div>
       <div class="body">
         <div class="stage">GREEN</div>
         <a href="https://fujirockfestival.com/artist/detail/6859" target="_blank" rel="noopener">IO <span class="link">↗</span></a>
         
-      </div>
+      <button class="pick-btn" type="button">＋ 今日見る</button></div>
     </article>
-<article class="event white " data-stage="white">
+<article data-name="Kroi" class="event white " data-stage="white">
       <div class="time">15:30<span>–16:30</span></div>
       <div class="body">
         <div class="stage">WHITE</div>
         <a href="https://fujirockfestival.com/artist/detail/5799" target="_blank" rel="noopener">Kroi <span class="link">↗</span></a>
         
-      </div>
+      <button class="pick-btn" type="button">＋ 今日見る</button></div>
     </article>
-<article class="event orange maybe" data-stage="orange">
+<article data-name="CADEJO" class="event orange" data-stage="orange">
       <div class="time">15:40<span>–16:20</span></div>
       <div class="body">
         <div class="stage">ORANGE</div>
         <a href="https://fujirockfestival.com/artist/detail/6830" target="_blank" rel="noopener">CADEJO <span class="link">↗</span></a>
-        <span class="priority maybe-b">候補</span>
-      </div>
+        
+      <button class="pick-btn" type="button">＋ 今日見る</button></div>
     </article>
-<article class="event red must" data-stage="red">
+<article data-name="cero" class="event red" data-stage="red">
       <div class="time">16:00<span>–17:00</span></div>
       <div class="body">
         <div class="stage">RED</div>
         <a href="https://fujirockfestival.com/artist/detail/3187" target="_blank" rel="noopener">cero <span class="link">↗</span></a>
-        <span class="priority">★ マスト</span>
-      </div>
+        
+      <button class="pick-btn" type="button">＋ 今日見る</button></div>
     </article>
-<article class="event field " data-stage="field">
+<article data-name="OAU" class="event field " data-stage="field">
       <div class="time">16:40<span>–17:40</span></div>
       <div class="body">
         <div class="stage">FIELD</div>
         <a href="https://fujirockfestival.com/artist/detail/969" target="_blank" rel="noopener">OAU <span class="link">↗</span></a>
         
-      </div>
+      <button class="pick-btn" type="button">＋ 今日見る</button></div>
     </article>
-<article class="event green must" data-stage="green">
+<article data-name="BASEMENT JAXX" class="event green" data-stage="green">
       <div class="time">17:00<span>–18:00</span></div>
       <div class="body">
         <div class="stage">GREEN</div>
         <a href="https://fujirockfestival.com/artist/detail/158" target="_blank" rel="noopener">BASEMENT JAXX <span class="link">↗</span></a>
-        <span class="priority">★ マスト</span>
-      </div>
+        
+      <button class="pick-btn" type="button">＋ 今日見る</button></div>
     </article>
-<article class="event white " data-stage="white">
+<article data-name="JOEY VALENCE &amp; BRAE" class="event white " data-stage="white">
       <div class="time">17:50<span>–18:50</span></div>
       <div class="body">
         <div class="stage">WHITE</div>
         <a href="https://fujirockfestival.com/artist/detail/6887" target="_blank" rel="noopener">JOEY VALENCE &amp; BRAE <span class="link">↗</span></a>
         
-      </div>
+      <button class="pick-btn" type="button">＋ 今日見る</button></div>
     </article>
-<article class="event orange " data-stage="orange">
+<article data-name="DMBQ" class="event orange " data-stage="orange">
       <div class="time">17:50<span>–18:30</span></div>
       <div class="body">
         <div class="stage">ORANGE</div>
         <a href="https://fujirockfestival.com/artist/detail/70" target="_blank" rel="noopener">DMBQ <span class="link">↗</span></a>
         
-      </div>
+      <button class="pick-btn" type="button">＋ 今日見る</button></div>
     </article>
-<article class="event red " data-stage="red">
+<article data-name="THURSTON MOORE GROUP" class="event red " data-stage="red">
       <div class="time">18:00<span>–19:00</span></div>
       <div class="body">
         <div class="stage">RED</div>
         <a href="https://fujirockfestival.com/artist/detail/3961" target="_blank" rel="noopener">THURSTON MOORE GROUP <span class="link">↗</span></a>
         
-      </div>
+      <button class="pick-btn" type="button">＋ 今日見る</button></div>
     </article>
-<article class="event field maybe" data-stage="field">
+<article data-name="KOKOROKO" class="event field" data-stage="field">
       <div class="time">18:30<span>–19:40</span></div>
       <div class="body">
         <div class="stage">FIELD</div>
         <a href="https://fujirockfestival.com/artist/detail/6860" target="_blank" rel="noopener">KOKOROKO <span class="link">↗</span></a>
-        <span class="priority maybe-b">候補</span>
-      </div>
+        
+      <button class="pick-btn" type="button">＋ 今日見る</button></div>
     </article>
-<article class="event green must" data-stage="green">
+<article data-name="Fujii Kaze" class="event fixed green" data-stage="green">
       <div class="time">19:00<span>–20:10</span></div>
       <div class="body">
         <div class="stage">GREEN</div>
         <a href="https://fujirockfestival.com/artist/detail/6853" target="_blank" rel="noopener">Fujii Kaze <span class="link">↗</span></a>
-        <span class="priority">★ マスト</span>
-      </div>
+        
+      <button class="pick-btn fixed-btn" disabled>★ 固定</button></div>
     </article>
-<article class="event white maybe" data-stage="white">
+<article data-name="XG" class="event white" data-stage="white">
       <div class="time">19:50<span>–20:50</span></div>
       <div class="body">
         <div class="stage">WHITE</div>
         <a href="https://fujirockfestival.com/artist/detail/6855" target="_blank" rel="noopener">XG <span class="link">↗</span></a>
-        <span class="priority maybe-b">候補</span>
-      </div>
+        
+      <button class="pick-btn" type="button">＋ 今日見る</button></div>
     </article>
-<article class="event orange " data-stage="orange">
+<article data-name="Bongjeingan" class="event orange " data-stage="orange">
       <div class="time">19:50<span>–20:30</span></div>
       <div class="body">
         <div class="stage">ORANGE</div>
         <a href="https://fujirockfestival.com/artist/detail/6452" target="_blank" rel="noopener">Bongjeingan <span class="link">↗</span></a>
         
-      </div>
+      <button class="pick-btn" type="button">＋ 今日見る</button></div>
     </article>
-<article class="event red " data-stage="red">
+<article data-name="サニーデイ・サービス" class="event red " data-stage="red">
       <div class="time">20:10<span>–21:10</span></div>
       <div class="body">
         <div class="stage">RED</div>
         <a href="https://fujirockfestival.com/artist/detail/2431" target="_blank" rel="noopener">サニーデイ・サービス <span class="link">↗</span></a>
         
-      </div>
+      <button class="pick-btn" type="button">＋ 今日見る</button></div>
     </article>
-<article class="event field " data-stage="field">
+<article data-name="BADBADNOTGOOD" class="event field " data-stage="field">
       <div class="time">20:30<span>–22:00</span></div>
       <div class="body">
         <div class="stage">FIELD</div>
         <a href="https://fujirockfestival.com/artist/detail/6166" target="_blank" rel="noopener">BADBADNOTGOOD <span class="link">↗</span></a>
         
-      </div>
+      <button class="pick-btn" type="button">＋ 今日見る</button></div>
     </article>
-<article class="event green must" data-stage="green">
+<article data-name="KHRUANGBIN" class="event fixed green" data-stage="green">
       <div class="time">21:10<span>–22:40</span></div>
       <div class="body">
         <div class="stage">GREEN</div>
         <a href="https://fujirockfestival.com/artist/detail/5212" target="_blank" rel="noopener">KHRUANGBIN <span class="link">↗</span></a>
-        <span class="priority">★ マスト</span>
-      </div>
+        
+      <button class="pick-btn fixed-btn" disabled>★ 固定</button></div>
     </article>
-<article class="event white " data-stage="white">
+<article data-name="TOMORA" class="event white " data-stage="white">
       <div class="time">22:00<span>–23:15</span></div>
       <div class="body">
         <div class="stage">WHITE</div>
         <a href="https://fujirockfestival.com/artist/detail/6854" target="_blank" rel="noopener">TOMORA <span class="link">↗</span></a>
         
-      </div>
+      <button class="pick-btn" type="button">＋ 今日見る</button></div>
     </article>
-<article class="event red " data-stage="red">
+<article data-name="唾奇" class="event red " data-stage="red">
       <div class="time">23:30<span>–24:20</span></div>
       <div class="body">
         <div class="stage">RED</div>
         <a href="https://fujirockfestival.com/artist/detail/6889" target="_blank" rel="noopener">唾奇 <span class="link">↗</span></a>
         
-      </div>
+      <button class="pick-btn" type="button">＋ 今日見る</button></div>
     </article>
-<article class="event red " data-stage="red">
+<article data-name="KELLY LEE OWENS (DJ)" class="event red " data-stage="red">
       <div class="time">24:30<span>–26:00</span></div>
       <div class="body">
         <div class="stage">RED</div>
         <a href="https://fujirockfestival.com/artist/detail/6888" target="_blank" rel="noopener">KELLY LEE OWENS (DJ) <span class="link">↗</span></a>
         
-      </div>
+      <button class="pick-btn" type="button">＋ 今日見る</button></div>
     </article>
-<article class="event red " data-stage="red">
+<article data-name="Weval DJ Set" class="event red " data-stage="red">
       <div class="time">26:00<span>–27:30</span></div>
       <div class="body">
         <div class="stage">RED</div>
         <a href="https://fujirockfestival.com/artist/detail/6909" target="_blank" rel="noopener">Weval DJ Set <span class="link">↗</span></a>
         
-      </div>
+      <button class="pick-btn" type="button">＋ 今日見る</button></div>
     </article>
-<article class="event red " data-stage="red">
+<article data-name="Soichi Terada" class="event red " data-stage="red">
       <div class="time">27:30<span>–29:00</span></div>
       <div class="body">
         <div class="stage">RED</div>
         <a href="https://fujirockfestival.com/artist/detail/4434" target="_blank" rel="noopener">Soichi Terada <span class="link">↗</span></a>
         
-      </div>
+      <button class="pick-btn" type="button">＋ 今日見る</button></div>
     </article>
   <footer>公式タイムテーブル（2026年7月25日）を5ステージに絞って再構成</footer>
 </main>
@@ -504,5 +534,49 @@ if ('serviceWorker' in navigator) {
   });
 }
 </script>
+
+<script>
+(function(){
+  const KEY='fujirock2026-selected-artists-v2';
+  const fixedNames=['Fujii Kaze','KHRUANGBIN'];
+  let selected=[];
+  try{ selected=JSON.parse(localStorage.getItem(KEY)||'[]'); }catch(e){ selected=[]; }
+
+  function save(){ localStorage.setItem(KEY, JSON.stringify(selected)); }
+
+  function render(){
+    document.querySelectorAll('.event[data-name]').forEach(card=>{
+      const name=card.dataset.name;
+      const btn=card.querySelector('.pick-btn');
+      if(fixedNames.includes(name)){
+        card.classList.add('fixed');
+        return;
+      }
+      const on=selected.includes(name);
+      card.classList.toggle('selected', on);
+      if(btn) btn.textContent=on ? '✓ 今日見る' : '＋ 今日見る';
+    });
+    const summary=document.getElementById('selectedSummary');
+    if(summary){
+      summary.textContent='固定：Fujii Kaze・KHRUANGBIN' +
+        (selected.length ? '｜追加：'+selected.join('、') : '｜追加なし');
+    }
+  }
+
+  document.addEventListener('click', e=>{
+    const btn=e.target.closest('.pick-btn:not(.fixed-btn)');
+    if(!btn) return;
+    const card=btn.closest('.event[data-name]');
+    if(!card) return;
+    const name=card.dataset.name;
+    selected=selected.includes(name) ? selected.filter(x=>x!==name) : [...selected,name];
+    save();
+    render();
+  });
+
+  render();
+})();
+</script>
+
 </body>
 </html>
