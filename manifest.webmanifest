@@ -1,7 +1,7 @@
 {
   "name": "Fuji Rock Companion 2026",
   "short_name": "FR Companion",
-  "start_url": "./index.html?v=3",
+  "start_url": "./index.html?v=4",
   "display": "standalone",
   "background_color": "#f4f4f1",
   "theme_color": "#111111",
