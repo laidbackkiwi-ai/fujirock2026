@@ -545,9 +545,9 @@ body{padding-bottom:82px}
   <label class="filter" for="f-orange">ORANGE</label>
   <label class="filter" for="f-selected">★ 今日見る</label>
 </div>
-<div class="selected-summary" id="selectedSummary">固定：Fujii Kaze・KHRUANGBIN</div>
+<div class="selected-summary" id="selectedSummary">選択中：なし</div>
 <main>
-  <div class="notice">藤井風とKHRUANGBINは固定。ほかは「＋ 今日見る」で当日追加・解除できます。</div>
+  <div class="notice">すべての出演者を「＋ 今日見る」で自由に追加・解除できます。選択内容は端末ごとに保存されます。</div>
   <article data-name="ブランデー戦記" class="event red " data-stage="red">
       <div class="time">10:20<span>–11:00</span></div>
       <div class="body">
@@ -740,13 +740,13 @@ body{padding-bottom:82px}
         
       <button class="pick-btn" type="button">＋ 今日見る</button></div>
     </article>
-<article data-name="Fujii Kaze" class="event fixed green" data-stage="green">
+<article data-name="Fujii Kaze" class="event green" data-stage="green">
       <div class="time">19:00<span>–20:10</span></div>
       <div class="body">
         <div class="stage">GREEN</div>
         <a href="https://fujirockfestival.com/artist/detail/6853" target="_blank" rel="noopener">Fujii Kaze <span class="link">↗</span></a>
         
-      <button class="pick-btn fixed-btn" disabled>★ 固定</button></div>
+      <button class="pick-btn">＋ 今日見る</button></div>
     </article>
 <article data-name="XG" class="event white" data-stage="white">
       <div class="time">19:50<span>–20:50</span></div>
@@ -780,13 +780,13 @@ body{padding-bottom:82px}
         
       <button class="pick-btn" type="button">＋ 今日見る</button></div>
     </article>
-<article data-name="KHRUANGBIN" class="event fixed green" data-stage="green">
+<article data-name="KHRUANGBIN" class="event green" data-stage="green">
       <div class="time">21:10<span>–22:40</span></div>
       <div class="body">
         <div class="stage">GREEN</div>
         <a href="https://fujirockfestival.com/artist/detail/5212" target="_blank" rel="noopener">KHRUANGBIN <span class="link">↗</span></a>
         
-      <button class="pick-btn fixed-btn" disabled>★ 固定</button></div>
+      <button class="pick-btn">＋ 今日見る</button></div>
     </article>
 <article data-name="TOMORA" class="event white " data-stage="white">
       <div class="time">22:00<span>–23:15</span></div>
@@ -1064,7 +1064,7 @@ if ('serviceWorker' in navigator) {
 <script>
 (function(){
   const KEY='fujirock2026-selected-artists-v2';
-  const fixedNames=['Fujii Kaze','KHRUANGBIN'];
+  const fixedNames=[];
   let selected=[];
   try{ selected=JSON.parse(localStorage.getItem(KEY)||'[]'); }catch(e){ selected=[]; }
 
@@ -1084,8 +1084,7 @@ if ('serviceWorker' in navigator) {
     });
     const summary=document.getElementById('selectedSummary');
     if(summary){
-      summary.textContent='固定：Fujii Kaze・KHRUANGBIN' +
-        (selected.length ? '｜追加：'+selected.join('、') : '｜追加なし');
+      summary.textContent=selected.length ? '選択中：'+selected.join('、') : '選択中：なし';
     }
   }
 
@@ -1132,7 +1131,7 @@ if ('serviceWorker' in navigator) {
     return (h>=24?h-24:h)*60+m+(h>=24?1440:0);
   }
   function updateNext(){
-    const fixed=['Fujii Kaze','KHRUANGBIN'];
+    const fixed=[];
     let selected=[];
     try{selected=JSON.parse(localStorage.getItem('fujirock2026-selected-artists-v2')||'[]')}catch(e){}
     const targets=new Set(fixed.concat(selected));
@@ -1163,7 +1162,7 @@ if ('serviceWorker' in navigator) {
     let selected=[];
     try{selected=JSON.parse(localStorage.getItem('fujirock2026-selected-artists-v2')||'[]')}catch(e){}
     document.querySelectorAll('[data-grid-name]').forEach(a=>{
-      a.classList.toggle('grid-fixed',['Fujii Kaze','KHRUANGBIN'].includes(a.dataset.gridName));
+      a.classList.remove('grid-fixed');
       a.classList.toggle('grid-selected',selected.includes(a.dataset.gridName));
     });
     updateNext();
@@ -1210,7 +1209,7 @@ if ('serviceWorker' in navigator) {
   function eventSchedule(){
     let selected=[];
     try{selected=JSON.parse(localStorage.getItem('fujirock2026-selected-artists-v2')||'[]')}catch(e){}
-    const names=new Set(['Fujii Kaze','KHRUANGBIN'].concat(selected));
+    const names=new Set(selected);
     return [...document.querySelectorAll('.event[data-name]')].filter(e=>names.has(e.dataset.name)).map(e=>{
       const timeText=e.querySelector('.time')?.childNodes[0]?.textContent?.trim()||'';
       const start=parseTime(timeText);
